@@ -9,6 +9,7 @@ interface HeaderProps {
 export default function Header({ page, onNavigate }: HeaderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const logoTaps = useRef(0);
   const logoTapTimer = useRef<number | undefined>(undefined);
 
@@ -21,6 +22,13 @@ export default function Header({ page, onNavigate }: HeaderProps) {
     onChange();
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   function go(target: Page) {
@@ -47,10 +55,12 @@ export default function Header({ page, onNavigate }: HeaderProps) {
         position: 'sticky',
         top: 0,
         zIndex: 60,
-        background: 'rgba(255,255,255,0.92)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid #E5E7EB',
+        background: scrolled ? 'rgba(255,255,255,0.68)' : 'rgba(255,255,255,0.78)',
+        backdropFilter: 'blur(22px) saturate(1.8)',
+        WebkitBackdropFilter: 'blur(22px) saturate(1.8)',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.55)' : '1px solid rgba(229,231,235,0.7)',
+        boxShadow: scrolled ? '0 10px 34px rgba(31,41,51,0.10)' : 'none',
+        transition: 'background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
       }}
     >
       <div
