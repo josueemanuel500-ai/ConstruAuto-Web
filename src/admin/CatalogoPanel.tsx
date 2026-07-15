@@ -1,6 +1,6 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { supabase } from '../lib/supabase';
-import { getErrorMessage } from './utils';
+import { fileSizeError, getErrorMessage } from './utils';
 import type { CatalogoListItem } from './useAdminLists';
 import {
   cardStyle,
@@ -45,6 +45,18 @@ export default function CatalogoPanel({ items, onDelete, onAdded }: CatalogoPane
 
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files && e.target.files[0];
+    if (f) {
+      const sizeErr = fileSizeError(f);
+      if (sizeErr) {
+        setKErr(sizeErr);
+        setKOk(false);
+        fileRef.current = null;
+        setKFileName('');
+        e.target.value = '';
+        return;
+      }
+    }
+    setKErr('');
     fileRef.current = f || null;
     setKFileName(f ? f.name : '');
   };

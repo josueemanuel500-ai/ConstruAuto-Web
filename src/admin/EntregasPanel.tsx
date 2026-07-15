@@ -1,6 +1,6 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { supabase } from '../lib/supabase';
-import { getErrorMessage } from './utils';
+import { fileSizeError, getErrorMessage } from './utils';
 import type { EntregaListItem } from './useAdminLists';
 import {
   cardStyle,
@@ -41,6 +41,18 @@ export default function EntregasPanel({ items, onDelete, onAdded }: EntregasPane
 
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files && e.target.files[0];
+    if (f) {
+      const sizeErr = fileSizeError(f);
+      if (sizeErr) {
+        setSaveErr(sizeErr);
+        setSaveOk(false);
+        fileRef.current = null;
+        setFileName('');
+        e.target.value = '';
+        return;
+      }
+    }
+    setSaveErr('');
     fileRef.current = f || null;
     setFileName(f ? f.name : '');
   };
