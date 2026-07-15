@@ -19,6 +19,9 @@ const localHoverStyles = `
   .ca-admin-btn-delete:hover {
     background: #FEE2E2;
   }
+  @media (max-width: 560px) {
+    .ca-admin-email { display: none; }
+  }
 `;
 
 export default function AdminApp() {
@@ -48,43 +51,104 @@ export default function AdminApp() {
   const { items, catItems, reloadEntregas, reloadCatalogo, deleteEntrega, deleteCatalogo } = useAdminLists(isAuthed);
 
   const logout = () => {
-    if (supabase) supabase.auth.signOut();
+    if (!supabase) return;
+    supabase.auth.signOut().finally(() => {
+      window.location.href = '/';
+    });
   };
+
+  const initial = (user?.email || '?').charAt(0).toUpperCase();
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <style>{localHoverStyles}</style>
 
-      <header style={{ background: 'var(--ca-carbon)', color: '#fff' }}>
+      <header
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 20,
+          background: 'linear-gradient(180deg, #26323C 0%, var(--ca-carbon) 100%)',
+          borderBottom: '1px solid rgba(255,105,15,0.35)',
+          boxShadow: '0 8px 24px rgba(15,20,25,0.25)',
+        }}
+      >
         <div
           style={{
-            maxWidth: 1000,
+            maxWidth: 1100,
             margin: '0 auto',
-            padding: '0 24px',
-            height: 66,
+            padding: '12px 24px',
+            minHeight: 70,
             display: 'flex',
+            flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: 16,
+            gap: '10px 16px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <a
+            href="/"
+            style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}
+            title="Ir al sitio de ConstruAuto"
+          >
             <img src="/assets/logo-blanco.png" alt="ConstruAuto de México" style={{ height: 28, display: 'block' }} />
             <span
               style={{
                 fontWeight: 800,
-                fontSize: 13,
+                fontSize: 12.5,
                 letterSpacing: '0.16em',
                 textTransform: 'uppercase',
                 color: 'var(--ca-orange-light)',
+                borderLeft: '1px solid rgba(255,255,255,0.18)',
+                paddingLeft: 12,
               }}
             >
-              Panel de entregas
+              Panel de administración
             </span>
-          </div>
+          </a>
           {isAuthed && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-              <span style={{ fontSize: 13.5, color: 'var(--ca-text-muted)', fontWeight: 600 }}>{user?.email}</span>
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px 16px' }}>
+              <a
+                href="/"
+                className="ca-nav-link"
+                style={{ fontSize: 13.5, color: 'var(--ca-text-muted)', fontWeight: 700, textDecoration: 'none' }}
+              >
+                Ver sitio
+              </a>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: 999,
+                    background: 'rgba(255,105,15,0.18)',
+                    border: '1px solid rgba(255,105,15,0.45)',
+                    color: 'var(--ca-orange-light)',
+                    fontWeight: 800,
+                    fontSize: 12.5,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flex: 'none',
+                  }}
+                >
+                  {initial}
+                </span>
+                <span
+                  className="ca-admin-email"
+                  style={{
+                    fontSize: 13.5,
+                    color: 'rgba(255,255,255,0.85)',
+                    fontWeight: 600,
+                    maxWidth: 200,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {user?.email}
+                </span>
+              </div>
               <button
                 onClick={logout}
                 className="ca-btn-ghost-dark"
