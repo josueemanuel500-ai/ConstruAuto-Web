@@ -1,0 +1,140 @@
+:root {
+  /* Marca */
+  --ca-orange: #FF690F;
+  --ca-orange-hover: #E55A05;
+  --ca-orange-light: #FF9A5C;
+  --ca-orange-mid: #E8731A;
+  --ca-orange-dark: #C24F06;
+
+  /* Texto / carbón */
+  --ca-carbon: #1F2933;
+  --ca-text-secondary: #52606D;
+  --ca-text-muted: #9AA5B1;
+
+  /* Fondos / bordes */
+  --ca-white: #FFFFFF;
+  --ca-bg-light: #F5F6F8;
+  --ca-border: #E5E7EB;
+  --ca-border-strong: #D1D5DB;
+
+  /* Acentos */
+  --ca-key-yellow: #FFD34D;
+  --ca-whatsapp: #25D366;
+  --ca-error: #DC2626;
+  --ca-success: #1F8A5B;
+
+  /* Radios */
+  --ca-radius-control: 10px;
+  --ca-radius-control-lg: 11px;
+  --ca-radius-card: 16px;
+  --ca-radius-card-lg: 20px;
+  --ca-radius-pill: 999px;
+
+  /* Sombras */
+  --ca-shadow-card: 0 4px 18px rgba(31, 41, 51, 0.06);
+  --ca-shadow-elevated: 0 12px 32px rgba(31, 41, 51, 0.10);
+  --ca-shadow-modal: 0 30px 80px rgba(0, 0, 0, 0.45);
+
+  /* Tipografía */
+  --ca-font: 'Barlow', system-ui, sans-serif;
+  --ca-font-pixel: 'Press Start 2P', monospace;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ca-white);
+  font-family: var(--ca-font);
+  color: var(--ca-carbon);
+  -webkit-font-smoothing: antialiased;
+}
+* { box-sizing: border-box; }
+h1, h2 { text-transform: uppercase; }
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+input, select, textarea, button { font-family: var(--ca-font); }
+input[type=range] { accent-color: var(--ca-orange); }
+a, button {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+@keyframes caFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes caPulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+@keyframes caFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes caGlow {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ---- Utilidades de hover reutilizables (equivalentes a style-hover del handoff) ---- */
+.ca-btn-primary {
+  cursor: pointer;
+  background: var(--ca-orange);
+  color: #fff;
+}
+.ca-btn-primary:hover { background: var(--ca-orange-hover); }
+
+.ca-btn-primary-lift:hover {
+  background: var(--ca-orange-hover);
+  transform: translateY(-2px);
+}
+
+.ca-btn-ghost-dark {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+.ca-btn-ghost-dark:hover { background: rgba(255, 255, 255, 0.16); }
+
+.ca-btn-whatsapp {
+  background: var(--ca-whatsapp);
+  color: #fff;
+}
+.ca-btn-whatsapp:hover { background: #1FB859; transform: translateY(-2px); }
+
+.ca-link-orange {
+  color: var(--ca-orange);
+  text-decoration: none;
+  cursor: pointer;
+}
+.ca-link-orange:hover { color: var(--ca-orange-hover); }
+
+.ca-card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.ca-card-hover:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(31, 41, 51, 0.14);
+}
+
+.ca-card-elevate:hover {
+  box-shadow: var(--ca-shadow-elevated);
+}
+
+.ca-nav-link {
+  cursor: pointer;
+  text-decoration: none;
+}
+.ca-nav-link:hover { color: var(--ca-orange) !important; }
+
+.ca-whatsapp-float:hover { background: rgba(255, 255, 255, 0.85) !important; }
