@@ -7,10 +7,12 @@
 RewriteEngine On
 
 # ---- 1) Forzar HTTPS y el subdominio www (una sola URL para Google) ----
-# IMPORTANTE: solo actives esto cuando el certificado SSL ya esté activo en tu hosting.
-RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+# IMPORTANTE: descomenta estas 3 líneas (RewriteCond/RewriteCond/RewriteRule) solo
+# cuando el certificado SSL ya esté activo y funcionando en tu hosting. Con el SSL
+# roto, este redirect deja el sitio inaccesible.
+# RewriteCond %{HTTPS} off [OR]
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
 
 # ---- 2) Cabeceras de seguridad ----
 <IfModule mod_headers.c>
@@ -18,7 +20,8 @@ RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # Descomenta la siguiente línea solo cuando el SSL ya esté activo:
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 </IfModule>
 
 # ---- 3) Anti-hotlinking de imágenes (otros sitios no pueden mostrarlas) ----
