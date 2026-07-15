@@ -18,8 +18,7 @@ RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
-  # Descomenta la siguiente línea solo cuando el SSL ya esté activo:
-  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 </IfModule>
 
 # ---- 3) Anti-hotlinking de imágenes (otros sitios no pueden mostrarlas) ----
