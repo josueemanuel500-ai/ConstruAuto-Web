@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { SectionProps } from '../lib/types';
 import { useUpcomingDeliveries } from '../lib/useUpcomingDeliveries';
 import { useYoutubePlaylist } from '../lib/useYoutubePlaylist';
 import { waLink } from '../lib/whatsapp';
+import { loadYouTubeApi, type YTPlayerInstance } from '../lib/youtubeApi';
 
 const waHref = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
@@ -18,7 +19,6 @@ export default function Entregas({ onNavigate }: SectionProps) {
   const curVideo = videos.find((v) => v.id === current) || null;
   const playerPlaying = playing && !!current;
   const playerIdle = !playerPlaying;
-  const playerEmbed = current ? `https://www.youtube.com/embed/${current}?autoplay=1&rel=0&modestbranding=1` : '';
   const playerTitle = curVideo?.title ?? '';
   const playerThumb = curVideo?.thumb ?? '';
   const playerDate = curVideo?.date ?? '';
@@ -26,8 +26,57 @@ export default function Entregas({ onNavigate }: SectionProps) {
   const ytEmpty = !loading && !error && videos.length === 0;
   const loadMoreLabel = loading ? 'Cargando…' : 'Cargar más videos';
 
+  // Reproducción en cola: al terminar un video, empieza el siguiente de la lista.
+  const playerContainerRef = useRef<HTMLDivElement | null>(null);
+  const ytPlayerRef = useRef<YTPlayerInstance | null>(null);
+  const videosRef = useRef(videos);
+  const currentRef = useRef(current);
+  videosRef.current = videos;
+  currentRef.current = current;
+
+  const playNextRef = useRef(() => {
+    const list = videosRef.current;
+    const idx = list.findIndex((v) => v.id === currentRef.current);
+    const next = idx !== -1 ? list[idx + 1] : undefined;
+    if (next) {
+      setCurrent(next.id);
+      setPlaying(true);
+    } else {
+      setPlaying(false);
+    }
+  });
+
+  useEffect(() => {
+    if (!playerPlaying) return;
+    let cancelled = false;
+    loadYouTubeApi().then((YT) => {
+      if (cancelled || !playerContainerRef.current) return;
+      ytPlayerRef.current = new YT.Player(playerContainerRef.current, {
+        videoId: currentRef.current ?? undefined,
+        playerVars: { autoplay: 1, rel: 0, modestbranding: 1 },
+        events: {
+          onStateChange: (e) => {
+            if (e.data === YT.PlayerState.ENDED) playNextRef.current();
+          },
+        },
+      });
+    });
+    return () => {
+      cancelled = true;
+      ytPlayerRef.current?.destroy();
+      ytPlayerRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playerPlaying]);
+
+  useEffect(() => {
+    if (playerPlaying && current) ytPlayerRef.current?.loadVideoById(current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current]);
+
   return (
     <main data-screen-label="Entregas" style={{ animation: 'caFadeUp 0.4s ease' }}>
+      <style>{'.ca-yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}'}</style>
       <section style={{ background: '#F5F6F8', borderBottom: '1px solid #E5E7EB' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 24px 56px' }}>
           <div
@@ -209,13 +258,12 @@ export default function Entregas({ onNavigate }: SectionProps) {
                 }}
               >
                 {playerPlaying && (
-                  <iframe
-                    src={playerEmbed}
-                    title={playerTitle}
-                    style={{ width: '100%', aspectRatio: '16/9', border: 'none', display: 'block', borderRadius: 18, background: '#1F2933' }}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                  <div
+                    className="ca-yt-frame"
+                    style={{ position: 'relative', width: '100%', aspectRatio: '16/9', borderRadius: 18, overflow: 'hidden', background: '#1F2933' }}
+                  >
+                    <div ref={playerContainerRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
+                  </div>
                 )}
                 {playerIdle && (
                   <div
@@ -244,25 +292,43 @@ export default function Entregas({ onNavigate }: SectionProps) {
                       }}
                     />
                     <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <span
-                        onMouseEnter={() => setHoverKey('play-btn')}
-                        onMouseLeave={() => setHoverKey(null)}
-                        style={{
-                          width: 88,
-                          height: 88,
-                          borderRadius: 99,
-                          background: 'rgba(255,105,15,0.95)',
-                          boxShadow: '0 16px 48px rgba(255,105,15,0.45)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          transition: 'transform 0.25s ease',
-                          transform: hoverKey === 'play-btn' ? 'scale(1.08)' : 'none',
-                        }}
-                      >
-                        <svg width="34" height="34" viewBox="0 0 24 24" fill="#fff" style={{ marginLeft: 4 }}>
-                          <path d="M8 5v14l11-7z"></path>
-                        </svg>
+                      <span style={{ position: 'relative', width: 88, height: 88, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <span
+                          aria-hidden="true"
+                          style={{
+                            position: 'absolute',
+                            inset: -16,
+                            borderRadius: 99,
+                            background: 'radial-gradient(circle, rgba(255,105,15,0.6), transparent 70%)',
+                            filter: 'blur(16px)',
+                            animation: 'caGlow 2.6s ease-in-out infinite',
+                            pointerEvents: 'none',
+                          }}
+                        />
+                        <span
+                          onMouseEnter={() => setHoverKey('play-btn')}
+                          onMouseLeave={() => setHoverKey(null)}
+                          style={{
+                            position: 'relative',
+                            width: 88,
+                            height: 88,
+                            borderRadius: 99,
+                            background: 'rgba(255,105,15,0.4)',
+                            backdropFilter: 'blur(10px) saturate(1.6)',
+                            WebkitBackdropFilter: 'blur(10px) saturate(1.6)',
+                            border: '1.5px solid rgba(255,255,255,0.5)',
+                            boxShadow: '0 16px 48px rgba(255,105,15,0.45)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'transform 0.25s ease',
+                            transform: hoverKey === 'play-btn' ? 'scale(1.08)' : 'none',
+                          }}
+                        >
+                          <svg width="34" height="34" viewBox="0 0 24 24" fill="#fff" style={{ marginLeft: 4 }}>
+                            <path d="M8 5v14l11-7z"></path>
+                          </svg>
+                        </span>
                       </span>
                     </div>
                   </div>
@@ -364,21 +430,39 @@ export default function Entregas({ onNavigate }: SectionProps) {
                             background: 'rgba(31,41,51,0.10)',
                           }}
                         >
-                          <span
-                            style={{
-                              width: 50,
-                              height: 50,
-                              borderRadius: 99,
-                              background: 'rgba(255,105,15,0.94)',
-                              boxShadow: '0 8px 24px rgba(255,105,15,0.4)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            <svg width="19" height="19" viewBox="0 0 24 24" fill="#fff" style={{ marginLeft: 2 }}>
-                              <path d="M8 5v14l11-7z"></path>
-                            </svg>
+                          <span style={{ position: 'relative', width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span
+                              aria-hidden="true"
+                              style={{
+                                position: 'absolute',
+                                inset: -10,
+                                borderRadius: 99,
+                                background: 'radial-gradient(circle, rgba(255,105,15,0.6), transparent 70%)',
+                                filter: 'blur(10px)',
+                                animation: 'caGlow 2.6s ease-in-out infinite',
+                                pointerEvents: 'none',
+                              }}
+                            />
+                            <span
+                              style={{
+                                position: 'relative',
+                                width: 50,
+                                height: 50,
+                                borderRadius: 99,
+                                background: 'rgba(255,105,15,0.42)',
+                                backdropFilter: 'blur(8px) saturate(1.6)',
+                                WebkitBackdropFilter: 'blur(8px) saturate(1.6)',
+                                border: '1.5px solid rgba(255,255,255,0.5)',
+                                boxShadow: '0 8px 24px rgba(255,105,15,0.4)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <svg width="19" height="19" viewBox="0 0 24 24" fill="#fff" style={{ marginLeft: 2 }}>
+                                <path d="M8 5v14l11-7z"></path>
+                              </svg>
+                            </span>
                           </span>
                         </div>
                         {active && (
