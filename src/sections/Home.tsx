@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { CSSProperties, ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import { useCatalog } from '../lib/useCatalog';
@@ -57,22 +57,6 @@ function useHover() {
   const [hover, setHover] = useState(false);
   return { hover, onMouseEnter: () => setHover(true), onMouseLeave: () => setHover(false) };
 }
-
-function CheckIcon({ color = '#FF9A5C', size = 15 }: { color?: string; size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flex: 'none' }}>
-      <path d="M20 6L9 17l-5-5"></path>
-    </svg>
-  );
-}
-
-const BADGES = [
-  'Más de 180 vehículos entregados',
-  'Empresa formalmente establecida',
-  'Atención personalizada',
-  'Proceso transparente',
-  'Entrega garantizada o devolución de dinero',
-];
 
 interface TimelinePaso {
   title: string;
@@ -202,21 +186,6 @@ export default function Home({ onNavigate }: SectionProps) {
   const finalCta = useHover();
   const finalWa = useHover();
 
-  const badgePill: CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 8,
-    fontSize: 13.5,
-    fontWeight: 700,
-    color: '#E4E7EB',
-    background: 'rgba(255,255,255,0.07)',
-    border: '1px solid rgba(255,255,255,0.16)',
-    borderRadius: 999,
-    padding: '8px 15px',
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
-  };
-
   return (
     <main data-screen-label="Inicio" style={{ animation: 'caFadeUp 0.4s ease' }}>
       {/* HERO */}
@@ -224,11 +193,11 @@ export default function Home({ onNavigate }: SectionProps) {
         style={{
           position: 'relative',
           marginTop: -72,
-          minHeight: 'clamp(600px, 92vh, 860px)',
+          minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
           overflow: 'hidden',
-          background: '#12171C',
+          background: '#0D1217',
           color: '#fff',
         }}
       >
@@ -239,7 +208,7 @@ export default function Home({ onNavigate }: SectionProps) {
             inset: 0,
             backgroundImage: 'url(/assets/hero-frames/ezgif-frame-001.jpg)',
             backgroundSize: 'cover',
-            backgroundPosition: 'center right',
+            backgroundPosition: 'center',
           }}
         />
         <div
@@ -248,107 +217,116 @@ export default function Home({ onNavigate }: SectionProps) {
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(100deg, rgba(15,20,25,0.96) 0%, rgba(15,20,25,0.82) 40%, rgba(15,20,25,0.42) 70%, rgba(15,20,25,0.14) 100%), linear-gradient(to top, rgba(15,20,25,0.9) 0%, rgba(15,20,25,0) 48%)',
+              'radial-gradient(120% 90% at 50% 0%, rgba(255,105,15,0.14), transparent 55%), linear-gradient(rgba(11,16,21,0.82) 0%, rgba(11,16,21,0.86) 55%, rgba(11,16,21,0.94) 100%)',
           }}
         />
         <div
           style={{
             position: 'relative',
             width: '100%',
-            maxWidth: 1200,
+            maxWidth: 860,
             margin: '0 auto',
-            padding: '128px 24px 64px',
+            padding: '120px 24px 104px',
+            textAlign: 'center',
             display: 'flex',
-            flexWrap: 'wrap',
-            gap: 56,
+            flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <div style={{ flex: '1 1 480px', minWidth: 300 }}>
-            <div
+          <img
+            src="/assets/logo-blanco.png"
+            alt="ConstruAuto de México"
+            style={{ height: 'clamp(66px,10vw,108px)', width: 'auto', display: 'block', marginBottom: 30 }}
+          />
+          <h1 style={{ margin: '0 0 24px', fontSize: 'clamp(42px,7vw,88px)', lineHeight: 1.0, fontWeight: 800, fontStyle: 'italic', letterSpacing: '-0.02em' }}>
+            Estrena sin enganche<span style={{ color: '#FF690F' }}>.</span>
+          </h1>
+          <div style={{ width: 64, height: 4, borderRadius: 2, background: '#FF690F', marginBottom: 28 }} />
+          <p style={{ margin: '0 0 36px', fontSize: 'clamp(17px,2.2vw,20px)', lineHeight: 1.6, color: '#E4E7EB', maxWidth: 620 }}>
+            Autofinanciamiento de autos usados y seminuevos en Mérida, Yucatán. Desde <strong style={{ color: '#fff' }}>$30,000</strong> hasta{' '}
+            <strong style={{ color: '#fff' }}>$150,000 MXN</strong>, con plazos de 12 a 60 meses y atención directa.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
+            <a
+              onClick={() => onNavigate('calculadora')}
+              onMouseEnter={heroCta.onMouseEnter}
+              onMouseLeave={heroCta.onMouseLeave}
               style={{
-                display: 'inline-block',
-                background: 'rgba(255,105,15,0.15)',
-                border: '1px solid rgba(255,105,15,0.45)',
-                color: '#FF9A5C',
-                fontWeight: 700,
-                fontSize: 13,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                padding: '7px 14px',
-                borderRadius: 999,
-                marginBottom: 22,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                cursor: 'pointer',
+                background: heroCta.hover ? '#E55A05' : '#FF690F',
+                color: '#fff',
+                fontWeight: 800,
+                fontSize: 17,
+                padding: '16px 30px',
+                borderRadius: 12,
+                textDecoration: 'none',
+                boxShadow: '0 10px 28px rgba(255,105,15,0.35)',
+                transform: heroCta.hover ? 'translateY(-2px)' : 'none',
               }}
             >
-              Autofinanciamiento · Mérida, Yucatán
-            </div>
-            <h1 style={{ margin: '0 0 20px', fontSize: 'clamp(46px,7.5vw,92px)', lineHeight: 0.98, fontWeight: 800, fontStyle: 'italic', letterSpacing: '-0.02em' }}>
-              Estrena <span style={{ color: '#FF690F' }}>sin enganche</span>
-            </h1>
-            <p style={{ margin: '0 0 34px', fontSize: 'clamp(17px,2.2vw,20px)', lineHeight: 1.55, color: '#E4E7EB', maxWidth: 500 }}>
-              Autos usados y seminuevos en Mérida desde <strong style={{ color: '#fff' }}>$30,000</strong> hasta <strong style={{ color: '#fff' }}>$150,000 MXN</strong>, con plazos de 12 a
-              60 meses.
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
-              <a
-                onClick={() => onNavigate('calculadora')}
-                onMouseEnter={heroCta.onMouseEnter}
-                onMouseLeave={heroCta.onMouseLeave}
-                style={{
-                  cursor: 'pointer',
-                  background: heroCta.hover ? '#E55A05' : '#FF690F',
-                  color: '#fff',
-                  fontWeight: 800,
-                  fontSize: 17,
-                  padding: '16px 30px',
-                  borderRadius: 12,
-                  textDecoration: 'none',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.02em',
-                  boxShadow: '0 10px 28px rgba(255,105,15,0.35)',
-                  transform: heroCta.hover ? 'translateY(-2px)' : 'none',
-                }}
-              >
-                Cotiza tu auto
-              </a>
-              <a
-                href={WA_HREF}
-                target="_blank"
-                rel="noreferrer"
-                onMouseEnter={heroWa.onMouseEnter}
-                onMouseLeave={heroWa.onMouseLeave}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 10,
-                  background: heroWa.hover ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.08)',
-                  border: '1.5px solid rgba(255,255,255,0.35)',
-                  color: '#fff',
-                  fontWeight: 700,
-                  fontSize: 17,
-                  padding: '16px 26px',
-                  borderRadius: 12,
-                  textDecoration: 'none',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.02em',
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.966-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-                Hablar por WhatsApp
-              </a>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 30, maxWidth: 560 }}>
-              {BADGES.map((b) => (
-                <div key={b} style={badgePill}>
-                  <CheckIcon />
-                  {b}
-                </div>
-              ))}
-            </div>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              Cotiza tu auto
+            </a>
+            <a
+              onClick={() => onNavigate('juego')}
+              onMouseEnter={heroWa.onMouseEnter}
+              onMouseLeave={heroWa.onMouseLeave}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                cursor: 'pointer',
+                background: heroWa.hover ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.08)',
+                border: '1.5px solid rgba(255,255,255,0.4)',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: 17,
+                padding: '16px 26px',
+                borderRadius: 12,
+                textDecoration: 'none',
+              }}
+            >
+              Ver promociones
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="M13 6l6 6-6 6"></path>
+              </svg>
+            </a>
           </div>
+          <a
+            href={WA_HREF}
+            target="_blank"
+            rel="noreferrer"
+            style={{ marginTop: 24, fontSize: 14.5, fontWeight: 600, color: 'rgba(255,255,255,0.75)', textDecoration: 'none' }}
+          >
+            Atención al instante por WhatsApp · 999 141 3325
+          </a>
         </div>
+        <button
+          onClick={() => window.scrollTo({ top: window.innerHeight - 60, behavior: 'smooth' })}
+          aria-label="Bajar"
+          style={{
+            position: 'absolute',
+            bottom: 22,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: 8,
+            color: 'rgba(255,255,255,0.85)',
+            animation: 'caFloat 2.4s ease-in-out infinite',
+          }}
+        >
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 9l6 6 6-6"></path>
+          </svg>
+        </button>
       </section>
 
       {/* STATS */}
