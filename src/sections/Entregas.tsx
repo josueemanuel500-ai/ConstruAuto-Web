@@ -242,7 +242,7 @@ export default function Entregas({ onNavigate }: SectionProps) {
             'radial-gradient(900px 480px at 82% -8%, rgba(255,105,15,0.12), transparent 60%),radial-gradient(600px 400px at -5% 100%, rgba(255,105,15,0.06), transparent 60%)',
         }}
       >
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '56px 24px 72px' }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '56px 24px 72px' }}>
           {ytHasVideos && (
             <>
               <div
