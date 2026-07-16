@@ -3,16 +3,10 @@ import type { CSSProperties, ReactElement, ReactNode } from 'react';
 import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import { useCatalog } from '../lib/useCatalog';
-import ScrollFrameCanvas from '../components/ScrollFrameCanvas';
 
 const WA_HREF = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
 const STAT_TARGETS = { entregas: 180, years: 5, montoK: 150 };
-
-const HERO_FRAME_COUNT = 271;
-function heroFramePath(index: number): string {
-  return '/assets/hero-frames/ezgif-frame-' + String(index + 1).padStart(3, '0') + '.jpg';
-}
 
 function useAnimatedStats() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -228,14 +222,48 @@ export default function Home({ onNavigate }: SectionProps) {
       {/* HERO */}
       <section
         style={{
-          background: '#1F2933',
-          backgroundImage:
-            'radial-gradient(900px 500px at 85% -10%, rgba(255,105,15,0.28), transparent 60%),radial-gradient(600px 400px at -10% 110%, rgba(255,105,15,0.12), transparent 60%)',
-          color: '#fff',
+          position: 'relative',
+          marginTop: -72,
+          minHeight: 'clamp(600px, 92vh, 860px)',
+          display: 'flex',
+          alignItems: 'center',
           overflow: 'hidden',
+          background: '#12171C',
+          color: '#fff',
         }}
       >
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '88px 24px 72px', display: 'flex', flexWrap: 'wrap', gap: 56, alignItems: 'center' }}>
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: 'url(/assets/hero-frames/ezgif-frame-001.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center right',
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(100deg, rgba(15,20,25,0.96) 0%, rgba(15,20,25,0.82) 40%, rgba(15,20,25,0.42) 70%, rgba(15,20,25,0.14) 100%), linear-gradient(to top, rgba(15,20,25,0.9) 0%, rgba(15,20,25,0) 48%)',
+          }}
+        />
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: 1200,
+            margin: '0 auto',
+            padding: '128px 24px 64px',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 56,
+            alignItems: 'center',
+          }}
+        >
           <div style={{ flex: '1 1 480px', minWidth: 300 }}>
             <div
               style={{
@@ -252,16 +280,14 @@ export default function Home({ onNavigate }: SectionProps) {
                 marginBottom: 22,
               }}
             >
-              Autofinanciamiento sin enganche
+              Autofinanciamiento · Mérida, Yucatán
             </div>
-            <h1 style={{ margin: '0 0 18px', fontSize: 'clamp(36px,5vw,58px)', lineHeight: 1.05, fontWeight: 800, fontStyle: 'italic', letterSpacing: '-0.01em' }}>
-              Tu próximo auto,
-              <br />
-              financiado <span style={{ color: '#FF690F' }}>a tu medida</span>.
+            <h1 style={{ margin: '0 0 20px', fontSize: 'clamp(46px,7.5vw,92px)', lineHeight: 0.98, fontWeight: 800, fontStyle: 'italic', letterSpacing: '-0.02em' }}>
+              Estrena <span style={{ color: '#FF690F' }}>sin enganche</span>
             </h1>
-            <p style={{ margin: '0 0 34px', fontSize: 19, lineHeight: 1.55, color: '#CBD2D9', maxWidth: 520 }}>
-              Autofinanciamiento de autos usados y seminuevos en Mérida, Yucatán. Financiamos desde <strong style={{ color: '#fff' }}>$30,000</strong> hasta{' '}
-              <strong style={{ color: '#fff' }}>$150,000 MXN</strong>, con plazos flexibles y un trámite claro de principio a fin.
+            <p style={{ margin: '0 0 34px', fontSize: 'clamp(17px,2.2vw,20px)', lineHeight: 1.55, color: '#E4E7EB', maxWidth: 500 }}>
+              Autos usados y seminuevos en Mérida desde <strong style={{ color: '#fff' }}>$30,000</strong> hasta <strong style={{ color: '#fff' }}>$150,000 MXN</strong>, con plazos de 12 a
+              60 meses.
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
               <a
@@ -320,68 +346,6 @@ export default function Home({ onNavigate }: SectionProps) {
                   {b}
                 </div>
               ))}
-            </div>
-          </div>
-          <div style={{ flex: '1 1 380px', minWidth: 300, maxWidth: 480, position: 'relative' }}>
-            <div
-              style={{
-                position: 'absolute',
-                inset: '-50px -40px',
-                background: 'radial-gradient(60% 55% at 50% 42%, rgba(255,105,15,0.38), transparent 70%)',
-                filter: 'blur(34px)',
-                animation: 'caGlow 6s ease-in-out infinite',
-                pointerEvents: 'none',
-              }}
-            ></div>
-            <div style={{ position: 'relative', animation: 'caFloat 7s ease-in-out infinite' }}>
-              <div
-                style={{
-                  borderRadius: 24,
-                  overflow: 'hidden',
-                  border: '1px solid rgba(255,255,255,0.18)',
-                  boxShadow: '0 30px 80px rgba(0,0,0,0.45)',
-                  aspectRatio: '4/3',
-                  background: 'rgba(255,255,255,0.04)',
-                }}
-              >
-                <ScrollFrameCanvas
-                  frameCount={HERO_FRAME_COUNT}
-                  framePath={heroFramePath}
-                  style={{ background: 'var(--ca-bg-light)' }}
-                />
-              </div>
-              <div
-                style={{
-                  margin: '-42px 18px 0',
-                  position: 'relative',
-                  background: 'rgba(31,41,51,0.78)',
-                  border: '1px solid rgba(255,255,255,0.16)',
-                  borderRadius: 18,
-                  padding: '20px 24px',
-                  backdropFilter: 'blur(14px)',
-                  WebkitBackdropFilter: 'blur(14px)',
-                  boxShadow: '0 20px 50px rgba(0,0,0,0.35)',
-                }}
-              >
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px 18px' }}>
-                  <div>
-                    <div style={{ fontSize: 20, fontWeight: 800, color: '#FF9A5C' }}>$30K–$150K</div>
-                    <div style={{ fontSize: 13, color: '#9AA5B1' }}>Monto financiable (MXN)</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 20, fontWeight: 800, color: '#FF9A5C' }}>12–60</div>
-                    <div style={{ fontSize: 13, color: '#9AA5B1' }}>Meses de plazo</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 20, fontWeight: 800, color: '#FF9A5C' }}>$6,950</div>
-                    <div style={{ fontSize: 13, color: '#9AA5B1' }}>Cuota de apertura única</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 20, fontWeight: 800, color: '#FF9A5C' }}>WhatsApp</div>
-                    <div style={{ fontSize: 13, color: '#9AA5B1' }}>Atención directa</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

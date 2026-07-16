@@ -25,7 +25,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -49,18 +49,26 @@ export default function Header({ page, onNavigate }: HeaderProps) {
     }
   }
 
+  // Transparente solo cuando estamos arriba del hero de Inicio (imagen oscura detrás).
+  // En cuanto se hace scroll, en el resto de páginas, o con el menú abierto → vidrio.
+  const transparent = page === 'home' && !scrolled && !menuOpen;
+
+  const navColorActive = transparent ? '#FF9A5C' : '#FF690F';
+  const navColorIdle = transparent ? 'rgba(255,255,255,0.92)' : '#1F2933';
+
   return (
     <header
       style={{
         position: 'sticky',
         top: 0,
         zIndex: 60,
-        background: scrolled ? 'rgba(255,255,255,0.68)' : 'rgba(255,255,255,0.78)',
-        backdropFilter: 'blur(22px) saturate(1.8)',
-        WebkitBackdropFilter: 'blur(22px) saturate(1.8)',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.55)' : '1px solid rgba(229,231,235,0.7)',
-        boxShadow: scrolled ? '0 10px 34px rgba(31,41,51,0.10)' : 'none',
-        transition: 'background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+        background: transparent ? 'transparent' : scrolled ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.8)',
+        backgroundImage: transparent ? 'linear-gradient(to bottom, rgba(15,20,25,0.55), rgba(15,20,25,0))' : undefined,
+        backdropFilter: transparent ? 'none' : 'blur(22px) saturate(1.8)',
+        WebkitBackdropFilter: transparent ? 'none' : 'blur(22px) saturate(1.8)',
+        borderBottom: transparent ? '1px solid transparent' : '1px solid rgba(229,231,235,0.7)',
+        boxShadow: transparent ? 'none' : '0 10px 34px rgba(31,41,51,0.10)',
+        transition: 'background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background-image 0.35s ease',
       }}
     >
       <div
@@ -76,7 +84,11 @@ export default function Header({ page, onNavigate }: HeaderProps) {
         }}
       >
         <a onClick={logoTap} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
-          <img src="/assets/logo-color.png" alt="ConstruAuto de México" style={{ height: 34, display: 'block' }} />
+          <img
+            src={transparent ? '/assets/logo-blanco.png' : '/assets/logo-color.png'}
+            alt="ConstruAuto de México"
+            style={{ height: 34, display: 'block' }}
+          />
         </a>
 
         {!isMobile && (
@@ -91,7 +103,8 @@ export default function Header({ page, onNavigate }: HeaderProps) {
                     fontSize: 15,
                     letterSpacing: '0.01em',
                     fontWeight: page === ni.key ? 800 : 600,
-                    color: page === ni.key ? '#FF690F' : '#1F2933',
+                    color: page === ni.key ? navColorActive : navColorIdle,
+                    transition: 'color 0.35s ease',
                   }}
                 >
                   {ni.label}
@@ -122,7 +135,15 @@ export default function Header({ page, onNavigate }: HeaderProps) {
             aria-label="Menú"
             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, display: 'flex', alignItems: 'center' }}
           >
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F2933" strokeWidth="2.4" strokeLinecap="round">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={transparent ? '#fff' : '#1F2933'}
+              strokeWidth="2.4"
+              strokeLinecap="round"
+            >
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -132,7 +153,18 @@ export default function Header({ page, onNavigate }: HeaderProps) {
       </div>
 
       {menuOpen && (
-        <div style={{ background: '#fff', borderBottom: '1px solid #E5E7EB', padding: '8px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <div
+          style={{
+            background: 'rgba(255,255,255,0.92)',
+            backdropFilter: 'blur(18px) saturate(1.6)',
+            WebkitBackdropFilter: 'blur(18px) saturate(1.6)',
+            borderBottom: '1px solid #E5E7EB',
+            padding: '8px 24px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+          }}
+        >
           {NAV_ITEMS.map((ni) => (
             <a
               key={ni.key}

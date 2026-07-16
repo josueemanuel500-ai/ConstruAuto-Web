@@ -11,6 +11,13 @@ import { useAdminLists } from './useAdminLists';
  * ver reglas del proyecto), scoped a este árbol.
  */
 const localHoverStyles = `
+  body {
+    background:
+      radial-gradient(1100px 620px at 85% -10%, rgba(255,105,15,0.16), transparent 60%),
+      radial-gradient(820px 620px at -10% 110%, rgba(255,105,15,0.09), transparent 60%),
+      #E9EDF2;
+    background-attachment: fixed;
+  }
   .ca-admin-btn-delete {
     background: #FEF2F2;
     border: 1px solid #FECACA;
@@ -68,7 +75,9 @@ export default function AdminApp() {
           position: 'sticky',
           top: 0,
           zIndex: 20,
-          background: 'linear-gradient(180deg, #26323C 0%, var(--ca-carbon) 100%)',
+          background: 'rgba(28,38,46,0.72)',
+          backdropFilter: 'blur(20px) saturate(1.6)',
+          WebkitBackdropFilter: 'blur(20px) saturate(1.6)',
           borderBottom: '1px solid rgba(255,105,15,0.35)',
           boxShadow: '0 8px 24px rgba(15,20,25,0.25)',
         }}
