@@ -233,11 +233,6 @@ export default function Home({ onNavigate }: SectionProps) {
             alignItems: 'center',
           }}
         >
-          <img
-            src="/assets/logo-blanco.png"
-            alt="ConstruAuto de México"
-            style={{ height: 'clamp(66px,10vw,108px)', width: 'auto', display: 'block', marginBottom: 30 }}
-          />
           <h1 style={{ margin: '0 0 24px', fontSize: 'clamp(42px,7vw,88px)', lineHeight: 1.0, fontWeight: 800, fontStyle: 'italic', letterSpacing: '-0.02em' }}>
             Estrena sin enganche<span style={{ color: '#FF690F' }}>.</span>
           </h1>
