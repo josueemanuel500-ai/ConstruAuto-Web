@@ -1329,18 +1329,18 @@
       this.style.cssText = 'display:block;width:100%;position:relative;font-family:Barlow,system-ui,sans-serif';
       this.innerHTML =
         '<style>' +
-        '.ca-pads{position:absolute;inset:auto 0 0 0;display:flex;justify-content:space-between;align-items:flex-end;padding:0 10px 10px;pointer-events:none;z-index:3}' +
-        '.ca-pads .ca-grp{display:flex;gap:18px;pointer-events:auto}' +
-        'button.ca-pad{width:100px;height:100px;padding:0;margin:0;background:none;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}' +
-        'button.ca-pad span{width:86px;height:86px;border-radius:99px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.4);background:rgba(31,41,51,0.45);color:#fff;font-size:28px;pointer-events:none;transition:background 0.08s,transform 0.08s}' +
-        'button.ca-pad[data-btn="j"]{width:124px;height:124px}' +
-        'button.ca-pad[data-btn="j"] span{width:108px;height:108px;border-color:rgba(255,105,15,0.85);background:rgba(255,105,15,0.45);font-size:32px;font-weight:800}' +
+        '.ca-pads{position:absolute;inset:auto 0 0 0;display:flex;justify-content:space-between;align-items:flex-end;padding:0 8px 8px;pointer-events:none;z-index:3}' +
+        '.ca-pads .ca-grp{display:flex;gap:12px;pointer-events:auto}' +
+        'button.ca-pad{width:64px;height:64px;padding:0;margin:0;background:none;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}' +
+        'button.ca-pad span{width:54px;height:54px;border-radius:99px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.4);background:rgba(31,41,51,0.45);color:#fff;font-size:18px;pointer-events:none;transition:background 0.08s,transform 0.08s}' +
+        'button.ca-pad[data-btn="j"]{width:78px;height:78px}' +
+        'button.ca-pad[data-btn="j"] span{width:66px;height:66px;border-color:rgba(255,105,15,0.85);background:rgba(255,105,15,0.45);font-size:20px;font-weight:800}' +
         'button.ca-pad.ca-on span{background:rgba(31,41,51,0.75);transform:scale(0.94)}' +
         'button.ca-pad[data-btn="j"].ca-on span{background:rgba(255,105,15,0.75)}' +
-        '@media (min-width:820px){.ca-pads{padding:0 18px 16px}.ca-pads .ca-grp{gap:24px}button.ca-pad{width:116px;height:116px}button.ca-pad span{width:98px;height:98px;font-size:32px}button.ca-pad[data-btn="j"]{width:140px;height:140px}button.ca-pad[data-btn="j"] span{width:120px;height:120px;font-size:36px}}' +
-        '@media (max-height:420px) and (orientation:landscape){button.ca-pad{width:90px;height:90px}button.ca-pad span{width:76px;height:76px;font-size:26px}button.ca-pad[data-btn="j"]{width:108px;height:108px}button.ca-pad[data-btn="j"] span{width:92px;height:92px}}' +
+        '@media (max-height:420px) and (orientation:landscape){button.ca-pad{width:56px;height:56px}button.ca-pad span{width:46px;height:46px;font-size:16px}button.ca-pad[data-btn="j"]{width:68px;height:68px}button.ca-pad[data-btn="j"] span{width:56px;height:56px}}' +
+        '@media (hover:hover) and (pointer:fine){.ca-pads{display:none}}' +
         '</style>' +
-        '<canvas width="' + (VW * 2) + '" height="' + (VH * 2) + '" style="width:100%;display:block;aspect-ratio:' + VW + '/' + VH + ';image-rendering:pixelated;background:' + COL.bg1 + ';touch-action:none"></canvas>' +
+        '<canvas width="' + (VW * 2) + '" height="' + (VH * 2) + '" style="width:100%;display:block;aspect-ratio:' + VW + '/' + VH + ';image-rendering:pixelated;background:#000;touch-action:none"></canvas>' +
         '<button class="ca-dev" aria-label="Modo prueba: eliminar enemigos" title="Prueba: elimina enemigos (E) · siguiente nivel (N)" style="position:absolute;top:10px;left:10px;height:40px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,105,15,0.7);background:rgba(16,22,28,0.75);color:#FF9A5C;font-size:11px;font-weight:800;letter-spacing:0.04em;cursor:pointer">PRUEBA</button>' +
         '<button class="ca-restart" aria-label="Reiniciar nivel" style="position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,0.5);background:rgba(31,41,51,0.55);color:#fff;font-size:18px;cursor:pointer;display:none">&#8634;</button>' +
         '<button class="ca-fs" aria-label="Pantalla completa" style="position:absolute;top:10px;right:58px;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,0.5);background:rgba(31,41,51,0.55);color:#fff;font-size:17px;cursor:pointer">&#x26F6;</button>' +
