@@ -3,10 +3,16 @@ import type { CSSProperties, ReactElement, ReactNode } from 'react';
 import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import { useCatalog } from '../lib/useCatalog';
+import ScrollFrameCanvas from '../components/ScrollFrameCanvas';
 
 const WA_HREF = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
 const STAT_TARGETS = { entregas: 180, years: 5, montoK: 150 };
+
+const HERO_FRAME_COUNT = 271;
+function heroFramePath(index: number): string {
+  return '/assets/hero-frames/ezgif-frame-' + String(index + 1).padStart(3, '0') + '.jpg';
+}
 
 function useAnimatedStats() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -338,20 +344,11 @@ export default function Home({ onNavigate }: SectionProps) {
                   background: 'rgba(255,255,255,0.04)',
                 }}
               >
-                <div
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: 'var(--ca-bg-light)',
-                    fontSize: 56,
-                  }}
-                  aria-label="Imagen premium: entrega de llaves o vehículo"
-                >
-                  🔑
-                </div>
+                <ScrollFrameCanvas
+                  frameCount={HERO_FRAME_COUNT}
+                  framePath={heroFramePath}
+                  style={{ background: 'var(--ca-bg-light)' }}
+                />
               </div>
               <div
                 style={{
