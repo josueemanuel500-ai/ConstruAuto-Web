@@ -47,12 +47,23 @@ html, body {
   font-family: var(--ca-font);
   color: var(--ca-carbon);
   -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Protección de contenido (producción): sin selección, sin callout iOS ----
+   Los inputs/textareas/[contenteditable] quedan exentos justo abajo para no
+   romper formularios ni buscadores. */
+body {
   -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
-input, textarea, [contenteditable] {
+input, textarea, select, [contenteditable="true"], [contenteditable=""] {
   -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
   user-select: text;
   -webkit-touch-callout: default;
 }
@@ -62,8 +73,11 @@ img {
   -webkit-user-drag: none;
   user-drag: none;
   -webkit-touch-callout: none;
-  user-select: none;
   -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
 }
 input, select, textarea, button { font-family: var(--ca-font); }
 input[type=range] { accent-color: var(--ca-orange); }
