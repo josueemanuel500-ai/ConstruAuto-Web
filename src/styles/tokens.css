@@ -47,6 +47,14 @@ html, body {
   font-family: var(--ca-font);
   color: var(--ca-carbon);
   -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
 }
 * { box-sizing: border-box; }
 h1, h2 { text-transform: uppercase; }
