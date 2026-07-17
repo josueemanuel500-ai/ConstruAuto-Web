@@ -47,7 +47,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             <div style={{ color: '#fff', fontWeight: 800, fontSize: 15, marginBottom: 14 }}>Contacto</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, fontSize: 14.5 }}>
               <a href={waHref} target="_blank" rel="noreferrer" className="ca-nav-link" style={{ color: '#9AA5B1', textDecoration: 'none' }}>
-                WhatsApp · 999 141 3325
+                WhatsApp · 999 356 4692
               </a>
               <a href="tel:+529994796369" className="ca-nav-link" style={{ color: '#9AA5B1', textDecoration: 'none' }}>
                 Teléfono · 999 479 6369

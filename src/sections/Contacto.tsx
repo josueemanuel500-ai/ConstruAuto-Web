@@ -350,7 +350,7 @@ export default function Contacto({ onNavigate }: SectionProps) {
                   onMouseLeave={() => setWaLinkHover(false)}
                   style={{ color: waLinkHover ? '#FF9A5C' : '#fff', textDecoration: 'none' }}
                 >
-                  999 141 3325
+                  999 356 4692
                 </a>
               </div>
               <div style={{ fontSize: 14.5, color: '#9AA5B1', marginBottom: 18 }}>WhatsApp</div>

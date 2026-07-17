@@ -2477,7 +2477,7 @@
       }
       this.querySelector('.ca-prize-label').textContent = stored.label;
       this.querySelector('.ca-prize-code').textContent = stored.code;
-      var num = (this.getAttribute('whatsapp') || '529991413325').replace(/\D/g, '');
+      var num = (this.getAttribute('whatsapp') || '529993564692').replace(/\D/g, '');
       var msg = 'Hola, terminé el Reto ConstruAuto 🎮 y gané: ' + stored.label + '. Mi código es ' + stored.code + '. ¿Cómo lo reclamo?';
       this.querySelector('.ca-prize-wa').href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg);
       this.querySelector('.ca-prize').style.display = 'flex';

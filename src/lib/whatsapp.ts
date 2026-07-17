@@ -1,4 +1,4 @@
-const DEFAULT_NUMBER = '529991413325';
+const DEFAULT_NUMBER = '529993564692';
 
 export function waNumber(): string {
   const raw = (import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined) ?? DEFAULT_NUMBER;

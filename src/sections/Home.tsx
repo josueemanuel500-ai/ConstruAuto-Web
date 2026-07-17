@@ -299,7 +299,7 @@ export default function Home({ onNavigate }: SectionProps) {
             rel="noreferrer"
             style={{ marginTop: 24, fontSize: 14.5, fontWeight: 600, color: 'rgba(255,255,255,0.75)', textDecoration: 'none' }}
           >
-            Atención al instante por WhatsApp · 999 141 3325
+            Atención al instante por WhatsApp · 999 356 4692
           </a>
         </div>
         <button
