@@ -2243,8 +2243,6 @@
           this.beep(500, 0.07); this.beep(720, 0.09);
         }
       }
-      /* corte de salto variable */
-      if (!this.inp.jHeld && p.vy < -2.5) p.vy = -2.5;
       /* gravedad: subida rápida, bajada controlada (sin flotar) */
       var grav = p.vy < 0 ? CFG.player.gravityUp : CFG.player.gravityDown;
       p.vy = Math.min(CFG.player.maxFall, p.vy + grav * dt);
