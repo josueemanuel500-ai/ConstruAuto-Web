@@ -244,12 +244,9 @@ export default function Home() {
               fontStyle: 'italic',
               letterSpacing: '-0.02em',
               textTransform: 'uppercase',
-              background: 'linear-gradient(135deg, #f5a218, #e3710e)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent',
-              WebkitTextFillColor: 'transparent',
-              filter: 'drop-shadow(0 4px 18px rgba(31,41,51,0.25))',
+              color: '#fff',
+              textShadow:
+                '-1px -1px 0 rgba(31,41,51,0.45), 1px -1px 0 rgba(31,41,51,0.45), -1px 1px 0 rgba(31,41,51,0.45), 1px 1px 0 rgba(31,41,51,0.45), 0 8px 28px rgba(31,41,51,0.3)',
             }}
           >
             Estrena sin
