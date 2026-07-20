@@ -1,5 +1,6 @@
 import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
+import Reveal from '../components/Reveal';
 
 const WA_REQUISITOS_HREF = waLink('Hola, ya tengo mis requisitos listos para el autofinanciamiento. ¿Cuál es el siguiente paso?');
 
@@ -78,31 +79,33 @@ export default function Servicios({ onNavigate }: SectionProps) {
             <p style={{ margin: 0, fontSize: 16.5, lineHeight: 1.6, color: '#52606D' }}>Del primer mensaje a las llaves en tu mano.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 22, marginBottom: 64 }}>
-            {PASOS.map((p) => (
-              <div key={p.n} style={{ background: '#F5F6F8', borderRadius: 18, padding: '28px 26px', position: 'relative' }}>
-                <div style={{ fontSize: 44, fontWeight: 800, fontStyle: 'italic', color: '#FF690F', opacity: 0.25, position: 'absolute', top: 14, right: 20 }}>
-                  {p.n}
+            {PASOS.map((p, i) => (
+              <Reveal key={p.n} delayMs={i * 60}>
+                <div style={{ background: '#F5F6F8', borderRadius: 18, padding: '28px 26px', position: 'relative' }}>
+                  <div style={{ fontSize: 44, fontWeight: 800, fontStyle: 'italic', color: '#FF690F', opacity: 0.25, position: 'absolute', top: 14, right: 20 }}>
+                    {p.n}
+                  </div>
+                  <div
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 12,
+                      background: '#FF690F',
+                      color: '#fff',
+                      fontWeight: 800,
+                      fontSize: 19,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: 16,
+                    }}
+                  >
+                    {p.n}
+                  </div>
+                  <h3 style={{ margin: '0 0 8px', fontSize: 19, fontWeight: 800 }}>{p.t}</h3>
+                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: '#52606D' }}>{p.d}</p>
                 </div>
-                <div
-                  style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 12,
-                    background: '#FF690F',
-                    color: '#fff',
-                    fontWeight: 800,
-                    fontSize: 19,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 16,
-                  }}
-                >
-                  {p.n}
-                </div>
-                <h3 style={{ margin: '0 0 8px', fontSize: 19, fontWeight: 800 }}>{p.t}</h3>
-                <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: '#52606D' }}>{p.d}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
 

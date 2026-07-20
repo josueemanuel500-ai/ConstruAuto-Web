@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NAV_ITEMS, type Page } from '../lib/pages';
+import { clickableLink } from '../lib/a11y';
 
 interface HeaderProps {
   page: Page;
@@ -86,7 +87,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
           gap: 20,
         }}
       >
-        <a onClick={logoTap} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
+        <a {...clickableLink(logoTap)} aria-label="Ir al inicio" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
           <img src="/assets/logo-color.png" alt="ConstruAuto de México" style={{ height: 34, display: 'block' }} />
         </a>
 
@@ -104,18 +105,30 @@ export default function Header({ page, onNavigate }: HeaderProps) {
                 } as const;
 
                 return ni.key === 'entregas' ? (
-                  <Link key={ni.key} to="/entregas" className="ca-nav-link" style={navLinkStyle}>
+                  <Link
+                    key={ni.key}
+                    to="/entregas"
+                    aria-current={page === ni.key ? 'page' : undefined}
+                    className="ca-nav-link"
+                    style={navLinkStyle}
+                  >
                     {ni.label}
                   </Link>
                 ) : (
-                  <a key={ni.key} onClick={() => go(ni.key)} className="ca-nav-link" style={navLinkStyle}>
+                  <a
+                    key={ni.key}
+                    {...clickableLink(() => go(ni.key))}
+                    aria-current={page === ni.key ? 'page' : undefined}
+                    className="ca-nav-link"
+                    style={navLinkStyle}
+                  >
                     {ni.label}
                   </a>
                 );
               })}
             </nav>
             <a
-              onClick={() => go('calculadora')}
+              {...clickableLink(() => go('calculadora'))}
               className="ca-btn-primary"
               style={{
                 flex: 'none',
@@ -136,7 +149,8 @@ export default function Header({ page, onNavigate }: HeaderProps) {
           <button
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menú"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, display: 'flex', alignItems: 'center' }}
+            aria-expanded={menuOpen}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F2933" strokeWidth="2.4" strokeLinecap="round">
               <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -173,17 +187,28 @@ export default function Header({ page, onNavigate }: HeaderProps) {
             } as const;
 
             return ni.key === 'entregas' ? (
-              <Link key={ni.key} to="/entregas" style={mobileLinkStyle} onClick={() => setMenuOpen(false)}>
+              <Link
+                key={ni.key}
+                to="/entregas"
+                aria-current={page === ni.key ? 'page' : undefined}
+                style={mobileLinkStyle}
+                onClick={() => setMenuOpen(false)}
+              >
                 {ni.label}
               </Link>
             ) : (
-              <a key={ni.key} onClick={() => go(ni.key)} style={mobileLinkStyle}>
+              <a
+                key={ni.key}
+                {...clickableLink(() => go(ni.key))}
+                aria-current={page === ni.key ? 'page' : undefined}
+                style={mobileLinkStyle}
+              >
                 {ni.label}
               </a>
             );
           })}
           <a
-            onClick={() => go('calculadora')}
+            {...clickableLink(() => go('calculadora'))}
             style={{
               cursor: 'pointer',
               marginTop: 14,

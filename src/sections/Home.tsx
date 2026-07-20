@@ -5,6 +5,9 @@ import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import { useCatalog } from '../lib/useCatalog';
 import { useUpcomingDeliveries } from '../lib/useUpcomingDeliveries';
+import { clickableLink } from '../lib/a11y';
+import Reveal from '../components/Reveal';
+import CarIcon from '../components/icons/CarIcon';
 
 const WA_HREF = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
@@ -248,7 +251,7 @@ export default function Home({ onNavigate }: SectionProps) {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
             <a
-              onClick={() => onNavigate('calculadora')}
+              {...clickableLink(() => onNavigate('calculadora'))}
               onMouseEnter={heroCta.onMouseEnter}
               onMouseLeave={heroCta.onMouseLeave}
               style={{
@@ -273,7 +276,7 @@ export default function Home({ onNavigate }: SectionProps) {
               Cotiza tu auto
             </a>
             <a
-              onClick={() => onNavigate('juego')}
+              {...clickableLink(() => onNavigate('juego'))}
               onMouseEnter={heroWa.onMouseEnter}
               onMouseLeave={heroWa.onMouseLeave}
               style={{
@@ -438,7 +441,7 @@ export default function Home({ onNavigate }: SectionProps) {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 36 }}>
-            <a onClick={() => onNavigate('servicios')} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
+            <a {...clickableLink(() => onNavigate('servicios'))} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
               Conoce el proceso completo →
             </a>
           </div>
@@ -455,41 +458,41 @@ export default function Home({ onNavigate }: SectionProps) {
               </div>
               <h2 style={{ margin: 0, fontSize: 'clamp(28px,3.6vw,40px)', fontWeight: 800, fontStyle: 'italic' }}>Autos como estos puedes estrenar</h2>
             </div>
-            <a onClick={() => onNavigate('catalogo')} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
+            <a {...clickableLink(() => onNavigate('catalogo'))} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
               Ver catálogo completo →
             </a>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24 }}>
-            {homeCars.map((car) => (
-              <div
-                key={car.id}
-                className="ca-card-elevate"
-                style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: 18, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-              >
-                {car.isSlot ? (
-                  <div
-                    style={{
-                      width: '100%',
-                      height: 190,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'var(--ca-bg-light)',
-                      fontSize: 40,
-                    }}
-                    aria-label="Arrastra la foto del auto"
-                  >
-                    🚗
+            {homeCars.map((car, i) => (
+              <Reveal key={car.id} delayMs={Math.min(i, 8) * 40}>
+                <div
+                  className="ca-card-elevate"
+                  style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: 18, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
+                >
+                  {car.isSlot ? (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: 190,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'var(--ca-bg-light)',
+                      }}
+                      aria-label="Arrastra la foto del auto"
+                    >
+                      <CarIcon size={40} color="#FF9A5C" />
+                    </div>
+                  ) : (
+                    <img src={car.img} alt={car.name} style={{ width: '100%', height: 190, objectFit: 'cover', display: 'block', background: '#F5F6F8' }} />
+                  )}
+                  <div style={{ padding: '20px 22px 22px', display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
+                    <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9AA5B1' }}>{car.tipo}</div>
+                    <div style={{ fontSize: 20, fontWeight: 800 }}>{car.name}</div>
+                    <div style={{ fontSize: 17, fontWeight: 800, color: '#FF690F', marginTop: 2 }}>Monto aprox. {car.price}</div>
                   </div>
-                ) : (
-                  <img src={car.img} alt={car.name} style={{ width: '100%', height: 190, objectFit: 'cover', display: 'block', background: '#F5F6F8' }} />
-                )}
-                <div style={{ padding: '20px 22px 22px', display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9AA5B1' }}>{car.tipo}</div>
-                  <div style={{ fontSize: 20, fontWeight: 800 }}>{car.name}</div>
-                  <div style={{ fontSize: 17, fontWeight: 800, color: '#FF690F', marginTop: 2 }}>Monto aprox. {car.price}</div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -600,7 +603,7 @@ export default function Home({ onNavigate }: SectionProps) {
           <div style={{ color: '#fff', fontSize: 20, fontWeight: 800, fontStyle: 'italic' }}>¿Listo para dar el primer paso?</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
             <a
-              onClick={() => onNavigate('calculadora')}
+              {...clickableLink(() => onNavigate('calculadora'))}
               onMouseEnter={midCta.onMouseEnter}
               onMouseLeave={midCta.onMouseLeave}
               style={{
@@ -620,7 +623,7 @@ export default function Home({ onNavigate }: SectionProps) {
               Cotiza tu auto
             </a>
             <a
-              onClick={() => onNavigate('contacto')}
+              {...clickableLink(() => onNavigate('contacto'))}
               onMouseEnter={midContacto.onMouseEnter}
               onMouseLeave={midContacto.onMouseLeave}
               style={{
@@ -803,7 +806,7 @@ export default function Home({ onNavigate }: SectionProps) {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
             <a
-              onClick={() => onNavigate('calculadora')}
+              {...clickableLink(() => onNavigate('calculadora'))}
               onMouseEnter={finalCta.onMouseEnter}
               onMouseLeave={finalCta.onMouseLeave}
               style={{

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { NAV_ITEMS, type Page } from '../lib/pages';
 import { waLink } from '../lib/whatsapp';
+import { clickableLink } from '../lib/a11y';
 
 interface FooterProps {
   onNavigate: (page: Page) => void;
@@ -45,7 +46,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 ) : (
                   <a
                     key={ni.key}
-                    onClick={() => onNavigate(ni.key)}
+                    {...clickableLink(() => onNavigate(ni.key))}
                     className="ca-nav-link"
                     style={{ color: '#9AA5B1', fontSize: 14.5, textDecoration: 'none' }}
                   >
