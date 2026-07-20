@@ -200,15 +200,19 @@ export default function Home() {
           display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 152px 24px 56px; }
         .ca-hero2-bgtext { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center;
           text-align: center; padding: 0 4vw; pointer-events: none; user-select: none; }
-        .ca-hero2-stat { position: absolute; top: 152px; left: 24px; max-width: 300px; z-index: 3; }
-        .ca-hero2-canvas { position: relative; z-index: 2; width: min(400px, 78vw); aspect-ratio: 3 / 4; }
-        .ca-hero2-copy { position: absolute; left: 24px; bottom: 88px; max-width: 480px; z-index: 3; }
+        .ca-hero2-stat { position: absolute; top: 152px; left: 24px; max-width: 300px; z-index: 3;
+          background: rgba(13,18,23,0.55); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+          border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 18px 20px; }
+        .ca-hero2-canvas { position: relative; z-index: 2; height: min(760px, 80vh); aspect-ratio: 3 / 4; }
+        .ca-hero2-copy { position: absolute; left: 24px; bottom: 40px; max-width: 480px; z-index: 3;
+          background: rgba(13,18,23,0.55); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+          border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 22px 24px; }
         .ca-hero2-detail { position: absolute; right: 24px; bottom: 40px; width: 208px; z-index: 3; }
         @media (max-width: 900px) {
           .ca-hero2 { padding: 116px 20px 40px; }
           .ca-hero2-bgtext { position: static; margin-bottom: 24px; }
-          .ca-hero2-stat { position: static; max-width: none; margin-bottom: 24px; }
-          .ca-hero2-canvas { width: min(300px, 70vw); margin-bottom: 24px; }
+          .ca-hero2-stat { position: static; max-width: none; margin-bottom: 20px; }
+          .ca-hero2-canvas { width: min(90vw, 420px); height: auto; margin-bottom: 20px; }
           .ca-hero2-copy { position: static; max-width: none; margin-bottom: 0; }
           .ca-hero2-detail { display: none; }
         }
@@ -260,26 +264,12 @@ export default function Home() {
           </p>
         </div>
 
-        <div
-          className="ca-hero2-canvas"
-          style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1.5px dashed rgba(255,255,255,0.3)',
-            borderRadius: 24,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 14,
-            padding: 24,
-            textAlign: 'center',
-          }}
-        >
-          <CarIcon size={44} color="#FF9A5C" />
-          <div style={{ fontWeight: 800, fontSize: 16, color: '#fff' }}>Tu imagen aquí</div>
-          <div style={{ fontSize: 13, lineHeight: 1.5, color: '#9AA5B1', maxWidth: 220 }}>
-            Reemplaza este bloque con la foto del auto o cliente que quieras destacar en Inicio.
-          </div>
+        <div className="ca-hero2-canvas" style={{ borderRadius: 24, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}>
+          <img
+            src="/assets/hero-canvas-prueba.jpg"
+            alt="ConstruAuto de México — la oportunidad está en tus manos"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
         </div>
 
         <div className="ca-hero2-copy">
