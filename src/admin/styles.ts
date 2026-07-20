@@ -1,11 +1,13 @@
 import type { CSSProperties } from 'react';
 
 export const cardStyle: CSSProperties = {
-  background: '#fff',
-  border: '1px solid var(--ca-border)',
+  background: 'rgba(255,255,255,0.62)',
+  backdropFilter: 'blur(18px) saturate(1.5)',
+  WebkitBackdropFilter: 'blur(18px) saturate(1.5)',
+  border: '1px solid rgba(255,255,255,0.85)',
   borderRadius: 20,
   padding: '28px 26px',
-  boxShadow: 'var(--ca-shadow-card)',
+  boxShadow: '0 14px 40px rgba(31,41,51,0.12)',
 };
 
 export const formStyle: CSSProperties = {
@@ -91,7 +93,9 @@ export const sectionTitleStyle: CSSProperties = {
 };
 
 export const emptyStyle: CSSProperties = {
-  background: '#fff',
+  background: 'rgba(255,255,255,0.5)',
+  backdropFilter: 'blur(14px)',
+  WebkitBackdropFilter: 'blur(14px)',
   border: '1px dashed var(--ca-border-strong)',
   borderRadius: 16,
   padding: 28,
@@ -102,13 +106,16 @@ export const emptyStyle: CSSProperties = {
 };
 
 export const listItemStyle: CSSProperties = {
-  background: '#fff',
-  border: '1px solid var(--ca-border)',
+  background: 'rgba(255,255,255,0.62)',
+  backdropFilter: 'blur(16px) saturate(1.4)',
+  WebkitBackdropFilter: 'blur(16px) saturate(1.4)',
+  border: '1px solid rgba(255,255,255,0.85)',
   borderRadius: 16,
   padding: 14,
   display: 'flex',
   gap: 14,
   alignItems: 'center',
+  boxShadow: '0 8px 24px rgba(31,41,51,0.08)',
 };
 
 export const thumbStyle: CSSProperties = {

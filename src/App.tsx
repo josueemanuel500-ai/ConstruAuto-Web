@@ -12,6 +12,7 @@ import Calculadora from './sections/Calculadora';
 import Contacto from './sections/Contacto';
 import type { Page } from './lib/pages';
 import type { SectionProps } from './lib/types';
+import { useContentProtection } from './hooks/useContentProtection';
 
 // Juega y gana carga ~40 MB de sprites/fondos del minijuego (game.js los precarga al
 // importarse). Se separa en su propio chunk para que el resto del sitio no pague ese
@@ -30,6 +31,7 @@ const SECTIONS: Record<Page, ComponentType<SectionProps>> = {
 };
 
 function App() {
+  useContentProtection();
   const [page, setPage] = useState<Page>('home');
 
   function navigate(target: Page) {

@@ -25,7 +25,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -49,18 +49,28 @@ export default function Header({ page, onNavigate }: HeaderProps) {
     }
   }
 
+  // En el hero de Inicio (arriba de todo) el menú está oculto; aparece al hacer scroll.
+  // En el resto de páginas siempre está visible.
+  const hiddenAtTop = page === 'home' && !scrolled && !menuOpen;
+
+  const navColorActive = '#FF690F';
+  const navColorIdle = '#1F2933';
+
   return (
     <header
       style={{
         position: 'sticky',
         top: 0,
         zIndex: 60,
-        background: scrolled ? 'rgba(255,255,255,0.68)' : 'rgba(255,255,255,0.78)',
+        background: 'rgba(255,255,255,0.72)',
         backdropFilter: 'blur(22px) saturate(1.8)',
         WebkitBackdropFilter: 'blur(22px) saturate(1.8)',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.55)' : '1px solid rgba(229,231,235,0.7)',
-        boxShadow: scrolled ? '0 10px 34px rgba(31,41,51,0.10)' : 'none',
-        transition: 'background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+        borderBottom: '1px solid rgba(229,231,235,0.7)',
+        boxShadow: '0 10px 34px rgba(31,41,51,0.10)',
+        transform: hiddenAtTop ? 'translateY(-100%)' : 'translateY(0)',
+        opacity: hiddenAtTop ? 0 : 1,
+        pointerEvents: hiddenAtTop ? 'none' : 'auto',
+        transition: 'transform 0.4s ease, opacity 0.4s ease',
       }}
     >
       <div
@@ -91,7 +101,8 @@ export default function Header({ page, onNavigate }: HeaderProps) {
                     fontSize: 15,
                     letterSpacing: '0.01em',
                     fontWeight: page === ni.key ? 800 : 600,
-                    color: page === ni.key ? '#FF690F' : '#1F2933',
+                    color: page === ni.key ? navColorActive : navColorIdle,
+                    transition: 'color 0.35s ease',
                   }}
                 >
                   {ni.label}
@@ -132,7 +143,18 @@ export default function Header({ page, onNavigate }: HeaderProps) {
       </div>
 
       {menuOpen && (
-        <div style={{ background: '#fff', borderBottom: '1px solid #E5E7EB', padding: '8px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <div
+          style={{
+            background: 'rgba(255,255,255,0.92)',
+            backdropFilter: 'blur(18px) saturate(1.6)',
+            WebkitBackdropFilter: 'blur(18px) saturate(1.6)',
+            borderBottom: '1px solid #E5E7EB',
+            padding: '8px 24px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+          }}
+        >
           {NAV_ITEMS.map((ni) => (
             <a
               key={ni.key}

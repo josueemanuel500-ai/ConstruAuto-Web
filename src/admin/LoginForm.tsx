@@ -42,11 +42,13 @@ export default function LoginForm() {
       style={{
         maxWidth: 400,
         margin: '48px auto',
-        background: '#fff',
-        border: '1px solid var(--ca-border)',
+        background: 'rgba(255,255,255,0.62)',
+        backdropFilter: 'blur(18px) saturate(1.5)',
+        WebkitBackdropFilter: 'blur(18px) saturate(1.5)',
+        border: '1px solid rgba(255,255,255,0.85)',
         borderRadius: 20,
         padding: '36px 32px',
-        boxShadow: '0 8px 30px rgba(31,41,51,0.08)',
+        boxShadow: '0 18px 50px rgba(31,41,51,0.14)',
       }}
     >
       <h1 style={{ margin: '0 0 6px', fontSize: 26, fontWeight: 800, fontStyle: 'italic' }}>Iniciar sesión</h1>

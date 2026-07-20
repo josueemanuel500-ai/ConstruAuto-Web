@@ -1326,22 +1326,21 @@
       if (this._init) return;
       this._init = true;
       var touch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-      this.style.cssText = 'display:block;width:100%;position:relative;font-family:Barlow,system-ui,sans-serif';
+      this.style.cssText = 'display:block;width:100%;position:relative;font-family:Barlow,system-ui,sans-serif;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none';
       this.innerHTML =
         '<style>' +
-        '.ca-pads{position:absolute;inset:auto 0 0 0;display:flex;justify-content:space-between;align-items:flex-end;padding:0 8px 8px;pointer-events:none;z-index:3}' +
+        '.ca-pads{position:absolute;inset:auto 0 0 0;display:flex;justify-content:space-between;align-items:flex-end;padding:0 8px 8px;pointer-events:none;z-index:3;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}' +
         '.ca-pads .ca-grp{display:flex;gap:12px;pointer-events:auto}' +
-        'button.ca-pad{width:64px;height:64px;padding:0;margin:0;background:none;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}' +
-        'button.ca-pad span{width:54px;height:54px;border-radius:99px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.4);background:rgba(31,41,51,0.45);color:#fff;font-size:18px;pointer-events:none;transition:background 0.08s,transform 0.08s}' +
+        'button.ca-pad{width:64px;height:64px;padding:0;margin:0;background:none;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-user-drag:none;-webkit-tap-highlight-color:transparent;outline:none}' +
+        'button.ca-pad span{width:54px;height:54px;border-radius:99px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.4);background:rgba(31,41,51,0.45);color:#fff;font-size:18px;pointer-events:none;transition:background 0.08s,transform 0.08s;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}' +
         'button.ca-pad[data-btn="j"]{width:78px;height:78px}' +
         'button.ca-pad[data-btn="j"] span{width:66px;height:66px;border-color:rgba(255,105,15,0.85);background:rgba(255,105,15,0.45);font-size:20px;font-weight:800}' +
         'button.ca-pad.ca-on span{background:rgba(31,41,51,0.75);transform:scale(0.94)}' +
         'button.ca-pad[data-btn="j"].ca-on span{background:rgba(255,105,15,0.75)}' +
-        '@media (max-height:420px) and (orientation:landscape){button.ca-pad{width:56px;height:56px}button.ca-pad span{width:46px;height:46px;font-size:16px}button.ca-pad[data-btn="j"]{width:68px;height:68px}button.ca-pad[data-btn="j"] span{width:56px;height:56px}}' +
+        '@media (max-height:420px) and (orientation:landscape){button.ca-pad{width:64px;height:64px}button.ca-pad span{width:54px;height:54px;font-size:18px}button.ca-pad[data-btn="j"]{width:80px;height:80px}button.ca-pad[data-btn="j"] span{width:68px;height:68px}}' +
         '@media (hover:hover) and (pointer:fine){.ca-pads{display:none}}' +
         '</style>' +
         '<canvas width="' + (VW * 2) + '" height="' + (VH * 2) + '" style="width:100%;display:block;aspect-ratio:' + VW + '/' + VH + ';image-rendering:pixelated;background:#000;touch-action:none"></canvas>' +
-        '<button class="ca-dev" aria-label="Modo prueba: eliminar enemigos" title="Prueba: elimina enemigos (E) · siguiente nivel (N)" style="position:absolute;top:10px;left:10px;height:40px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,105,15,0.7);background:rgba(16,22,28,0.75);color:#FF9A5C;font-size:11px;font-weight:800;letter-spacing:0.04em;cursor:pointer">PRUEBA</button>' +
         '<button class="ca-restart" aria-label="Reiniciar nivel" style="position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,0.5);background:rgba(31,41,51,0.55);color:#fff;font-size:18px;cursor:pointer;display:none">&#8634;</button>' +
         '<button class="ca-fs" aria-label="Pantalla completa" style="position:absolute;top:10px;right:58px;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,0.5);background:rgba(31,41,51,0.55);color:#fff;font-size:17px;cursor:pointer">&#x26F6;</button>' +
         '<button class="ca-audio" aria-label="Configuracion de sonido" style="position:absolute;top:10px;right:106px;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,0.5);background:rgba(31,41,51,0.55);color:#fff;font-size:18px;cursor:pointer;z-index:6">&#9881;</button>' +
@@ -1407,8 +1406,6 @@
         if (e.key === ' ' || e.key === 'Spacebar') { if (self.state === 'menu') self.start(); else self.press(); }
         if ((e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') && self.state !== 'menu') self.press();
         if (e.key === 'r' || e.key === 'R') self.resetLevel();
-        if (e.key === 'e' || e.key === 'E') self.devClear();
-        if (e.key === 'n' || e.key === 'N') self.devNext();
       };
       this._ku = function (e) {
         if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') self.inp.l = false;
@@ -1420,7 +1417,11 @@
           self._last = 0;
           self.inp.l = self.inp.r = self.inp.jHeld = false;
           if (self._ac && self._ac.state === 'running') self._ac.suspend();
-        } else if (self._ac && self._ac.state === 'suspended') self._ac.resume();
+          if (self._bgm) { try { self._bgm.pause(); } catch (e) {} }
+        } else {
+          if (self._ac && self._ac.state === 'suspended') self._ac.resume();
+          if (self._bgm && self.audio.music && self.state !== 'menu') { try { self._bgm.play(); } catch (e) {} }
+        }
       };
       /* al perder el foco, soltar todas las entradas (evita movimiento fantasma) */
       this._bl = function () { self.inp.l = self.inp.r = self.inp.jHeld = false; };
@@ -1477,7 +1478,6 @@
       window.addEventListener('pointerup', this._relPtr);
       window.addEventListener('pointercancel', this._relPtr);
       this.querySelector('.ca-restart').addEventListener('click', function () { self.resetLevel(); });
-      this.querySelector('.ca-dev').addEventListener('click', function () { self.devClear(); });
       /* ===== Panel de configuración de sonido ===== */
       var cfgPanel = this.querySelector('.ca-cfg');
       var mkBar = function (sel) {
@@ -2243,8 +2243,6 @@
           this.beep(500, 0.07); this.beep(720, 0.09);
         }
       }
-      /* corte de salto variable */
-      if (!this.inp.jHeld && p.vy < -2.5) p.vy = -2.5;
       /* gravedad: subida rápida, bajada controlada (sin flotar) */
       var grav = p.vy < 0 ? CFG.player.gravityUp : CFG.player.gravityDown;
       p.vy = Math.min(CFG.player.maxFall, p.vy + grav * dt);
@@ -2477,7 +2475,7 @@
       }
       this.querySelector('.ca-prize-label').textContent = stored.label;
       this.querySelector('.ca-prize-code').textContent = stored.code;
-      var num = (this.getAttribute('whatsapp') || '529991413325').replace(/\D/g, '');
+      var num = (this.getAttribute('whatsapp') || '529993564692').replace(/\D/g, '');
       var msg = 'Hola, terminé el Reto ConstruAuto 🎮 y gané: ' + stored.label + '. Mi código es ' + stored.code + '. ¿Cómo lo reclamo?';
       this.querySelector('.ca-prize-wa').href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg);
       this.querySelector('.ca-prize').style.display = 'flex';
