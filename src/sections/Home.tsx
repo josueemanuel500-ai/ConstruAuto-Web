@@ -291,7 +291,7 @@ export default function Home() {
                 alignItems: 'center',
                 gap: 10,
                 cursor: 'pointer',
-                background: heroCta.hover ? '#E55A05' : '#FF690F',
+                background: heroCta.hover ? '#E55A05' : 'var(--ca-orange-gradient)',
                 color: '#fff',
                 fontWeight: 800,
                 fontSize: 15.5,
@@ -442,7 +442,7 @@ export default function Home() {
                         width: 48,
                         height: 48,
                         borderRadius: 99,
-                        background: isActive ? '#FF690F' : '#FFF0E6',
+                        background: isActive ? 'var(--ca-orange-gradient)' : '#FFF0E6',
                         color: isActive ? '#fff' : '#FF690F',
                         fontWeight: 800,
                         fontSize: 20,
@@ -570,7 +570,7 @@ export default function Home() {
                         position: 'absolute',
                         top: 14,
                         left: 14,
-                        background: '#FF690F',
+                        background: 'var(--ca-orange-gradient)',
                         color: '#fff',
                         fontWeight: 800,
                         fontSize: 12.5,
@@ -605,7 +605,7 @@ export default function Home() {
               style={{
                 display: 'inline-block',
                 cursor: 'pointer',
-                background: verTodasCta.hover ? '#E55A05' : '#FF690F',
+                background: verTodasCta.hover ? '#E55A05' : 'var(--ca-orange-gradient)',
                 color: '#fff',
                 fontWeight: 800,
                 fontSize: 16,
@@ -646,7 +646,7 @@ export default function Home() {
               onMouseLeave={midCta.onMouseLeave}
               style={{
                 cursor: 'pointer',
-                background: midCta.hover ? '#E55A05' : '#FF690F',
+                background: midCta.hover ? '#E55A05' : 'var(--ca-orange-gradient)',
                 color: '#fff',
                 fontWeight: 800,
                 fontSize: 15,
@@ -849,7 +849,7 @@ export default function Home() {
               onMouseLeave={finalCta.onMouseLeave}
               style={{
                 cursor: 'pointer',
-                background: finalCta.hover ? '#E55A05' : '#FF690F',
+                background: finalCta.hover ? '#E55A05' : 'var(--ca-orange-gradient)',
                 color: '#fff',
                 fontWeight: 800,
                 fontSize: 18,

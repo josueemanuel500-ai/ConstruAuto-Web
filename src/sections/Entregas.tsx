@@ -171,7 +171,7 @@ export default function Entregas() {
                           position: 'absolute',
                           top: 14,
                           left: 14,
-                          background: '#FF690F',
+                          background: 'var(--ca-orange-gradient)',
                           color: '#fff',
                           fontWeight: 800,
                           fontSize: 12.5,
@@ -366,7 +366,7 @@ export default function Entregas() {
                           width: 8,
                           height: 8,
                           borderRadius: 99,
-                          background: '#FF690F',
+                          background: 'var(--ca-orange-gradient)',
                           animation: 'caPulse 2s ease-out infinite',
                         }}
                       />
@@ -469,7 +469,7 @@ export default function Entregas() {
                               position: 'absolute',
                               top: 12,
                               left: 12,
-                              background: '#FF690F',
+                              background: 'var(--ca-orange-gradient)',
                               color: '#fff',
                               fontWeight: 800,
                               fontSize: 11.5,
@@ -513,7 +513,7 @@ export default function Entregas() {
                     onMouseEnter={() => setHoverKey('load-more')}
                     onMouseLeave={() => setHoverKey(null)}
                     style={{
-                      background: hoverKey === 'load-more' ? '#FF690F' : 'rgba(255,255,255,0.8)',
+                      background: hoverKey === 'load-more' ? 'var(--ca-orange-gradient)' : 'rgba(255,255,255,0.8)',
                       backdropFilter: 'blur(12px)',
                       WebkitBackdropFilter: 'blur(12px)',
                       border: '1.5px solid #FF690F',

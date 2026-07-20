@@ -57,9 +57,9 @@ const PRIZES: Prize[] = [
 const LAYOUT = [0, 1, 2, 0, 3, 1, 0, 2];
 
 const LEGEND = [
-  { full: '1 mensualidad bonificada', dot: '#FF690F' },
+  { full: '1 mensualidad bonificada', dot: 'var(--ca-orange-gradient)' },
   { full: '50% desc. en interés', dot: '#1F2933' },
-  { full: '3 mensualidades bonificadas', dot: '#FF690F' },
+  { full: '3 mensualidades bonificadas', dot: 'var(--ca-orange-gradient)' },
   { full: '1 año de seguro gratis', dot: '#FFD34D' },
 ];
 

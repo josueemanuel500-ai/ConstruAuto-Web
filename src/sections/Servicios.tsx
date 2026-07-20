@@ -88,7 +88,7 @@ export default function Servicios() {
                       width: 44,
                       height: 44,
                       borderRadius: 12,
-                      background: '#FF690F',
+                      background: 'var(--ca-orange-gradient)',
                       color: '#fff',
                       fontWeight: 800,
                       fontSize: 19,

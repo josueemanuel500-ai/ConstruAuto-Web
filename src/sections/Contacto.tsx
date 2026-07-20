@@ -251,7 +251,7 @@ export default function Contacto() {
                   onMouseEnter={() => setSubmitBtnHover(true)}
                   onMouseLeave={() => setSubmitBtnHover(false)}
                   style={{
-                    background: submitBtnHover ? '#E55A05' : '#FF690F',
+                    background: submitBtnHover ? '#E55A05' : 'var(--ca-orange-gradient)',
                     color: '#fff',
                     fontWeight: 800,
                     fontSize: 17,

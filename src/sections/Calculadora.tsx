@@ -73,7 +73,7 @@ export default function Calculadora() {
                       fontWeight: 700,
                       fontSize: 15,
                       border: `1.5px solid ${selected ? '#FF690F' : '#D1D5DB'}`,
-                      background: selected ? '#FF690F' : '#fff',
+                      background: selected ? 'var(--ca-orange-gradient)' : '#fff',
                       color: selected ? '#fff' : '#1F2933',
                     }}
                   >

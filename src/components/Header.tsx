@@ -177,7 +177,7 @@ export default function Header() {
             style={{
               cursor: 'pointer',
               marginTop: 14,
-              background: '#FF690F',
+              background: 'var(--ca-orange-gradient)',
               color: '#fff',
               fontWeight: 800,
               fontSize: 16,

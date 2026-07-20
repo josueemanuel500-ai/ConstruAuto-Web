@@ -89,7 +89,7 @@ export default function Catalogo() {
                       onMouseLeave={() => setBtnHoverId(null)}
                       style={{
                         marginTop: 14,
-                        background: btnHoverId === car.id ? '#FF690F' : '#1F2933',
+                        background: btnHoverId === car.id ? 'var(--ca-orange-gradient)' : '#1F2933',
                         color: '#fff',
                         fontWeight: 800,
                         fontSize: 15.5,

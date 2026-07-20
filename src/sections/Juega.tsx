@@ -165,7 +165,7 @@ export default function Juega() {
                       position: 'absolute',
                       top: 14,
                       right: -30,
-                      background: '#FF690F',
+                      background: 'var(--ca-orange-gradient)',
                       color: '#fff',
                       fontWeight: 800,
                       fontSize: 11,

@@ -5,6 +5,7 @@
   --ca-orange-light: #FF9A5C;
   --ca-orange-mid: #E8731A;
   --ca-orange-dark: #C24F06;
+  --ca-orange-gradient: linear-gradient(135deg, #F59518, #FF690F);
 
   /* Texto / carbón */
   --ca-carbon: #1F2933;
@@ -118,7 +119,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 /* ---- Utilidades de hover reutilizables (equivalentes a style-hover del handoff) ---- */
 .ca-btn-primary {
   cursor: pointer;
-  background: var(--ca-orange);
+  background: var(--ca-orange-gradient);
   color: #fff;
 }
 .ca-btn-primary:hover { background: var(--ca-orange-hover); }
