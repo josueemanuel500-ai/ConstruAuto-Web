@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { NAV_ITEMS, type Page } from '../lib/pages';
+import { clickableLink } from '../lib/a11y';
 
 interface HeaderProps {
   page: Page;
@@ -85,7 +86,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
           gap: 20,
         }}
       >
-        <a onClick={logoTap} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
+        <a {...clickableLink(logoTap)} aria-label="Ir al inicio" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
           <img src="/assets/logo-color.png" alt="ConstruAuto de México" style={{ height: 34, display: 'block' }} />
         </a>
 
@@ -95,7 +96,8 @@ export default function Header({ page, onNavigate }: HeaderProps) {
               {NAV_ITEMS.map((ni) => (
                 <a
                   key={ni.key}
-                  onClick={() => go(ni.key)}
+                  {...clickableLink(() => go(ni.key))}
+                  aria-current={page === ni.key ? 'page' : undefined}
                   className="ca-nav-link"
                   style={{
                     fontSize: 15,
@@ -110,7 +112,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
               ))}
             </nav>
             <a
-              onClick={() => go('calculadora')}
+              {...clickableLink(() => go('calculadora'))}
               className="ca-btn-primary"
               style={{
                 flex: 'none',
@@ -131,6 +133,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
           <button
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menú"
+            aria-expanded={menuOpen}
             style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, display: 'flex', alignItems: 'center' }}
           >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F2933" strokeWidth="2.4" strokeLinecap="round">
@@ -158,7 +161,8 @@ export default function Header({ page, onNavigate }: HeaderProps) {
           {NAV_ITEMS.map((ni) => (
             <a
               key={ni.key}
-              onClick={() => go(ni.key)}
+              {...clickableLink(() => go(ni.key))}
+              aria-current={page === ni.key ? 'page' : undefined}
               style={{
                 cursor: 'pointer',
                 fontSize: 17,
@@ -173,7 +177,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
             </a>
           ))}
           <a
-            onClick={() => go('calculadora')}
+            {...clickableLink(() => go('calculadora'))}
             style={{
               cursor: 'pointer',
               marginTop: 14,

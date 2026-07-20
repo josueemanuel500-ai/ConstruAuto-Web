@@ -17,32 +17,34 @@
 
 ### Color Palette
 
-| Role | Hex | CSS Variable |
-|------|-----|--------------|
-| Primary | `#1E293B` | `--color-primary` |
-| On Primary | `#FFFFFF` | `--color-on-primary` |
-| Secondary | `#334155` | `--color-secondary` |
-| Accent/CTA | `#DC2626` | `--color-accent` |
-| Background | `#F8FAFC` | `--color-background` |
-| Foreground | `#0F172A` | `--color-foreground` |
-| Muted | `#E9EDF1` | `--color-muted` |
-| Border | `#E2E8F0` | `--color-border` |
-| Destructive | `#DC2626` | `--color-destructive` |
-| Ring | `#1E293B` | `--color-ring` |
+> **Override:** Keeping the site's existing brand palette (`src/styles/tokens.css`) instead of the tool-suggested navy/red — orange is the established ConstruAuto brand color (logo, social, signage).
 
-**Color Notes:** Premium dark + action red
+| Role | Hex | CSS Variable (existing) |
+|------|-----|--------------|
+| Primary | `#FF690F` | `--ca-orange` |
+| Primary Hover | `#E55A05` | `--ca-orange-hover` |
+| Primary Light | `#FF9A5C` | `--ca-orange-light` |
+| Text / Foreground | `#1F2933` | `--ca-carbon` |
+| Text Secondary | `#52606D` | `--ca-text-secondary` |
+| Background | `#FFFFFF` | `--ca-white` |
+| Background Muted | `#F5F6F8` | `--ca-bg-light` |
+| Border | `#E5E7EB` | `--ca-border` |
+| Accent (key/highlight) | `#FFD34D` | `--ca-key-yellow` |
+| WhatsApp CTA | `#25D366` | `--ca-whatsapp` |
+| Destructive | `#DC2626` | `--ca-error` |
+| Success | `#1F8A5B` | `--ca-success` |
+
+**Color Notes:** Warm, action-oriented orange as brand primary; keep as-is. Apply Flat-Design/Trust-&-Authority guidance (contrast, consistency, semantic tokens) on top of this palette rather than replacing it.
 
 ### Typography
 
-- **Heading Font:** Lexend
-- **Body Font:** Source Sans 3
-- **Mood:** corporate, trustworthy, accessible, readable, professional, clean
-- **Google Fonts:** [Lexend + Source Sans 3](https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap)
+> **Override:** Keeping the existing brand font (Barlow, already loaded site-wide) instead of the tool-suggested Lexend/Source Sans 3, for the same brand-consistency reason as colors.
 
-**CSS Import:**
-```css
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
-```
+- **Heading/Body Font:** Barlow (existing, `--ca-font`)
+- **Pixel/Game Font:** Press Start 2P (existing, `--ca-font-pixel`, used only in the `Juega` mini-game section)
+- **Mood:** modern, bold, approachable — already aligned with the "moderno/cercano" direction
+
+**Note:** Lexend/Source Sans 3 remain a good option later specifically for long-form legibility (e.g. terms/legal text), but are not needed for this pass.
 
 ### Spacing Variables
 

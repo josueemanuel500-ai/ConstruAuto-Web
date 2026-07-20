@@ -3,6 +3,7 @@ import type { ReactElement, ReactNode } from 'react';
 import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import { useCatalog } from '../lib/useCatalog';
+import { clickableLink } from '../lib/a11y';
 
 const WA_HREF = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
@@ -243,7 +244,7 @@ export default function Home({ onNavigate }: SectionProps) {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
             <a
-              onClick={() => onNavigate('calculadora')}
+              {...clickableLink(() => onNavigate('calculadora'))}
               onMouseEnter={heroCta.onMouseEnter}
               onMouseLeave={heroCta.onMouseLeave}
               style={{
@@ -268,7 +269,7 @@ export default function Home({ onNavigate }: SectionProps) {
               Cotiza tu auto
             </a>
             <a
-              onClick={() => onNavigate('juego')}
+              {...clickableLink(() => onNavigate('juego'))}
               onMouseEnter={heroWa.onMouseEnter}
               onMouseLeave={heroWa.onMouseLeave}
               style={{
@@ -433,7 +434,7 @@ export default function Home({ onNavigate }: SectionProps) {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 36 }}>
-            <a onClick={() => onNavigate('servicios')} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
+            <a {...clickableLink(() => onNavigate('servicios'))} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
               Conoce el proceso completo →
             </a>
           </div>
@@ -450,7 +451,7 @@ export default function Home({ onNavigate }: SectionProps) {
               </div>
               <h2 style={{ margin: 0, fontSize: 'clamp(28px,3.6vw,40px)', fontWeight: 800, fontStyle: 'italic' }}>Autos como estos puedes estrenar</h2>
             </div>
-            <a onClick={() => onNavigate('catalogo')} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
+            <a {...clickableLink(() => onNavigate('catalogo'))} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
               Ver catálogo completo →
             </a>
           </div>
@@ -507,7 +508,7 @@ export default function Home({ onNavigate }: SectionProps) {
           <div style={{ color: '#fff', fontSize: 20, fontWeight: 800, fontStyle: 'italic' }}>¿Listo para dar el primer paso?</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
             <a
-              onClick={() => onNavigate('calculadora')}
+              {...clickableLink(() => onNavigate('calculadora'))}
               onMouseEnter={midCta.onMouseEnter}
               onMouseLeave={midCta.onMouseLeave}
               style={{
@@ -527,7 +528,7 @@ export default function Home({ onNavigate }: SectionProps) {
               Cotiza tu auto
             </a>
             <a
-              onClick={() => onNavigate('contacto')}
+              {...clickableLink(() => onNavigate('contacto'))}
               onMouseEnter={midContacto.onMouseEnter}
               onMouseLeave={midContacto.onMouseLeave}
               style={{
@@ -629,7 +630,7 @@ export default function Home({ onNavigate }: SectionProps) {
               <h3 style={{ margin: '0 0 8px', fontSize: 19, fontWeight: 800 }}>Entregas documentadas</h3>
               <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: '#52606D' }}>
                 Publicamos nuestras entregas en video: clientes reales recibiendo las llaves de su auto.{' '}
-                <a onClick={() => onNavigate('entregas')} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, textDecoration: 'none' }}>
+                <a {...clickableLink(() => onNavigate('entregas'))} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, textDecoration: 'none' }}>
                   Ver entregas →
                 </a>
               </p>
@@ -710,7 +711,7 @@ export default function Home({ onNavigate }: SectionProps) {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
             <a
-              onClick={() => onNavigate('calculadora')}
+              {...clickableLink(() => onNavigate('calculadora'))}
               onMouseEnter={finalCta.onMouseEnter}
               onMouseLeave={finalCta.onMouseLeave}
               style={{

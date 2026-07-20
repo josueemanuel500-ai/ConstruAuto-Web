@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
+import { clickableLink } from '../lib/a11y';
 
 const waHrefDirect = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
@@ -311,7 +312,7 @@ export default function Contacto({ onNavigate }: SectionProps) {
                     Enviar por WhatsApp
                   </a>
                   <a
-                    onClick={resetForm}
+                    {...clickableLink(resetForm)}
                     style={{
                       cursor: 'pointer',
                       background: '#F5F6F8',
