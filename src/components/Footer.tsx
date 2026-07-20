@@ -1,13 +1,8 @@
 import { Link } from 'react-router-dom';
-import { NAV_ITEMS, type Page } from '../lib/pages';
+import { NAV_ITEMS } from '../lib/pages';
 import { waLink } from '../lib/whatsapp';
-import { clickableLink } from '../lib/a11y';
 
-interface FooterProps {
-  onNavigate: (page: Page) => void;
-}
-
-export default function Footer({ onNavigate }: FooterProps) {
+export default function Footer() {
   const waHref = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
   return (
@@ -33,27 +28,16 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div>
             <div style={{ color: '#fff', fontWeight: 800, fontSize: 15, marginBottom: 14 }}>Sitio</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-              {NAV_ITEMS.map((ni) =>
-                ni.key === 'entregas' ? (
-                  <Link
-                    key={ni.key}
-                    to="/entregas"
-                    className="ca-nav-link"
-                    style={{ color: '#9AA5B1', fontSize: 14.5, textDecoration: 'none' }}
-                  >
-                    {ni.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={ni.key}
-                    {...clickableLink(() => onNavigate(ni.key))}
-                    className="ca-nav-link"
-                    style={{ color: '#9AA5B1', fontSize: 14.5, textDecoration: 'none' }}
-                  >
-                    {ni.label}
-                  </a>
-                ),
-              )}
+              {NAV_ITEMS.map((ni) => (
+                <Link
+                  key={ni.key}
+                  to={ni.path}
+                  className="ca-nav-link"
+                  style={{ color: '#9AA5B1', fontSize: 14.5, textDecoration: 'none' }}
+                >
+                  {ni.label}
+                </Link>
+              ))}
             </div>
           </div>
           <div>

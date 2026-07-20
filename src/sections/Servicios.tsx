@@ -1,4 +1,3 @@
-import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import Reveal from '../components/Reveal';
 
@@ -31,8 +30,7 @@ const REQUISITOS: Requisito[] = [
   { t: 'Cuota de apertura', d: '$6,950 MXN — pago único al firmar tu contrato' },
 ];
 
-export default function Servicios({ onNavigate }: SectionProps) {
-  void onNavigate;
+export default function Servicios() {
 
   return (
     <main data-screen-label="Servicios" style={{ animation: 'caFadeUp 0.4s ease' }}>

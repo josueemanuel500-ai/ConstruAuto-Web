@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import type { SectionProps } from '../lib/types';
 import { fmtMoney, fmtMoneyCents, financeFactor, waLink } from '../lib/whatsapp';
 
 const PLAZOS = [12, 24, 36, 48, 60];
 
-export default function Calculadora({ onNavigate }: SectionProps) {
-  void onNavigate;
+export default function Calculadora() {
 
   const [monto, setMonto] = useState(90000);
   const [plazo, setPlazo] = useState(36);

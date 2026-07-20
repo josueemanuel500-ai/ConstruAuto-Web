@@ -8,13 +8,13 @@ export type Page =
   | 'juego'
   | 'contacto';
 
-export const NAV_ITEMS: { key: Page; label: string }[] = [
-  { key: 'home', label: 'Inicio' },
-  { key: 'servicios', label: 'Servicios' },
-  { key: 'entregas', label: 'Entregas' },
-  { key: 'nosotros', label: 'Nosotros' },
-  { key: 'catalogo', label: 'Catálogo' },
-  { key: 'calculadora', label: 'Calculadora' },
-  { key: 'juego', label: 'Juega y gana' },
-  { key: 'contacto', label: 'Contacto' },
+export const NAV_ITEMS: { key: Page; label: string; path: string }[] = [
+  { key: 'home', label: 'Inicio', path: '/' },
+  { key: 'servicios', label: 'Servicios', path: '/servicios' },
+  { key: 'entregas', label: 'Entregas', path: '/entregas' },
+  { key: 'nosotros', label: 'Nosotros', path: '/nosotros' },
+  { key: 'catalogo', label: 'Catálogo', path: '/catalogo' },
+  { key: 'calculadora', label: 'Calculadora', path: '/calculadora' },
+  { key: 'juego', label: 'Juega y gana', path: '/juego' },
+  { key: 'contacto', label: 'Contacto', path: '/contacto' },
 ];

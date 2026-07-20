@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import Reveal from '../components/Reveal';
 
@@ -51,8 +50,7 @@ const STATS = [
   { value: '1 a 1', label: 'Atención personalizada' },
 ];
 
-export default function Nosotros({ onNavigate }: SectionProps) {
-  void onNavigate;
+export default function Nosotros() {
 
   const waHover = useHover();
   const fbHover = useHover();

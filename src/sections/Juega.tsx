@@ -1,5 +1,4 @@
 import '../game/game.js';
-import type { SectionProps } from '../lib/types';
 import { waNumber } from '../lib/whatsapp';
 import RouletteWheel3D from '../components/RouletteWheel3D';
 
@@ -37,8 +36,7 @@ const prizes = [
   },
 ];
 
-export default function Juega({ onNavigate }: SectionProps) {
-  void onNavigate;
+export default function Juega() {
 
   return (
     <main data-screen-label="Juega y gana" style={{ animation: 'caFadeUp 0.4s ease' }}>

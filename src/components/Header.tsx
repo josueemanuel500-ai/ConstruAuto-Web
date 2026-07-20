@@ -1,17 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { NAV_ITEMS, type Page } from '../lib/pages';
-import { clickableLink } from '../lib/a11y';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { NAV_ITEMS } from '../lib/pages';
 
-interface HeaderProps {
-  page: Page;
-  onNavigate: (page: Page) => void;
-}
-
-export default function Header({ page, onNavigate }: HeaderProps) {
+export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
   const logoTaps = useRef(0);
   const logoTapTimer = useRef<number | undefined>(undefined);
 
@@ -33,13 +28,8 @@ export default function Header({ page, onNavigate }: HeaderProps) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  function go(target: Page) {
-    onNavigate(target);
-    setMenuOpen(false);
-  }
-
   function logoTap() {
-    go('home');
+    setMenuOpen(false);
     logoTaps.current += 1;
     window.clearTimeout(logoTapTimer.current);
     logoTapTimer.current = window.setTimeout(() => {
@@ -53,7 +43,8 @@ export default function Header({ page, onNavigate }: HeaderProps) {
 
   // En el hero de Inicio (arriba de todo) el menú está oculto; aparece al hacer scroll.
   // En el resto de páginas siempre está visible.
-  const hiddenAtTop = page === 'home' && !scrolled && !menuOpen;
+  const isHome = location.pathname === '/';
+  const hiddenAtTop = isHome && !scrolled && !menuOpen;
 
   const navColorActive = '#FF690F';
   const navColorIdle = '#1F2933';
@@ -87,48 +78,34 @@ export default function Header({ page, onNavigate }: HeaderProps) {
           gap: 20,
         }}
       >
-        <a {...clickableLink(logoTap)} aria-label="Ir al inicio" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
+        <Link to="/" onClick={logoTap} aria-label="Ir al inicio" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
           <img src="/assets/logo-color.png" alt="ConstruAuto de México" style={{ height: 34, display: 'block' }} />
-        </a>
+        </Link>
 
         {!isMobile && (
           <>
             <nav style={{ display: 'flex', alignItems: 'center', gap: 22, minWidth: 0 }}>
-              {NAV_ITEMS.map((ni) => {
-                const navLinkStyle = {
-                  fontSize: 15,
-                  letterSpacing: '0.01em',
-                  fontWeight: page === ni.key ? 800 : 600,
-                  color: page === ni.key ? navColorActive : navColorIdle,
-                  transition: 'color 0.35s ease',
-                  textDecoration: 'none',
-                } as const;
-
-                return ni.key === 'entregas' ? (
-                  <Link
-                    key={ni.key}
-                    to="/entregas"
-                    aria-current={page === ni.key ? 'page' : undefined}
-                    className="ca-nav-link"
-                    style={navLinkStyle}
-                  >
-                    {ni.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={ni.key}
-                    {...clickableLink(() => go(ni.key))}
-                    aria-current={page === ni.key ? 'page' : undefined}
-                    className="ca-nav-link"
-                    style={navLinkStyle}
-                  >
-                    {ni.label}
-                  </a>
-                );
-              })}
+              {NAV_ITEMS.map((ni) => (
+                <NavLink
+                  key={ni.key}
+                  to={ni.path}
+                  end={ni.path === '/'}
+                  className="ca-nav-link"
+                  style={({ isActive }) => ({
+                    fontSize: 15,
+                    letterSpacing: '0.01em',
+                    fontWeight: isActive ? 800 : 600,
+                    color: isActive ? navColorActive : navColorIdle,
+                    transition: 'color 0.35s ease',
+                    textDecoration: 'none',
+                  })}
+                >
+                  {ni.label}
+                </NavLink>
+              ))}
             </nav>
-            <a
-              {...clickableLink(() => go('calculadora'))}
+            <Link
+              to="/calculadora"
               className="ca-btn-primary"
               style={{
                 flex: 'none',
@@ -141,7 +118,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
               }}
             >
               Cotiza tu auto
-            </a>
+            </Link>
           </>
         )}
 
@@ -174,41 +151,29 @@ export default function Header({ page, onNavigate }: HeaderProps) {
             gap: 2,
           }}
         >
-          {NAV_ITEMS.map((ni) => {
-            const mobileLinkStyle = {
-              cursor: 'pointer',
-              fontSize: 17,
-              padding: '12px 4px',
-              borderBottom: '1px solid #F3F4F6',
-              textDecoration: 'none',
-              fontWeight: page === ni.key ? 800 : 600,
-              color: page === ni.key ? '#FF690F' : '#1F2933',
-              display: 'block',
-            } as const;
-
-            return ni.key === 'entregas' ? (
-              <Link
-                key={ni.key}
-                to="/entregas"
-                aria-current={page === ni.key ? 'page' : undefined}
-                style={mobileLinkStyle}
-                onClick={() => setMenuOpen(false)}
-              >
-                {ni.label}
-              </Link>
-            ) : (
-              <a
-                key={ni.key}
-                {...clickableLink(() => go(ni.key))}
-                aria-current={page === ni.key ? 'page' : undefined}
-                style={mobileLinkStyle}
-              >
-                {ni.label}
-              </a>
-            );
-          })}
-          <a
-            {...clickableLink(() => go('calculadora'))}
+          {NAV_ITEMS.map((ni) => (
+            <NavLink
+              key={ni.key}
+              to={ni.path}
+              end={ni.path === '/'}
+              onClick={() => setMenuOpen(false)}
+              style={({ isActive }) => ({
+                cursor: 'pointer',
+                fontSize: 17,
+                padding: '12px 4px',
+                borderBottom: '1px solid #F3F4F6',
+                textDecoration: 'none',
+                fontWeight: isActive ? 800 : 600,
+                color: isActive ? '#FF690F' : '#1F2933',
+                display: 'block',
+              })}
+            >
+              {ni.label}
+            </NavLink>
+          ))}
+          <Link
+            to="/calculadora"
+            onClick={() => setMenuOpen(false)}
             style={{
               cursor: 'pointer',
               marginTop: 14,
@@ -220,10 +185,11 @@ export default function Header({ page, onNavigate }: HeaderProps) {
               borderRadius: 10,
               textAlign: 'center',
               textDecoration: 'none',
+              display: 'block',
             }}
           >
             Cotiza tu auto
-          </a>
+          </Link>
         </div>
       )}
     </header>

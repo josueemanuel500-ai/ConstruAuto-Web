@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import { useCatalog } from '../lib/useCatalog';
 import { useUpcomingDeliveries } from '../lib/useUpcomingDeliveries';
-import { clickableLink } from '../lib/a11y';
 import Reveal from '../components/Reveal';
 import CarIcon from '../components/icons/CarIcon';
 
@@ -177,7 +175,7 @@ const trustCards: { icon: ReactElement; title: string; desc: ReactNode }[] = [
   },
 ];
 
-export default function Home({ onNavigate }: SectionProps) {
+export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const { ref: statsRef, vals: stats } = useAnimatedStats();
   const { cars } = useCatalog();
@@ -250,8 +248,8 @@ export default function Home({ onNavigate }: SectionProps) {
             <strong style={{ color: '#fff' }}>$150,000 MXN</strong>, con plazos de 12 a 60 meses y atención directa.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
-            <a
-              {...clickableLink(() => onNavigate('calculadora'))}
+            <Link
+              to="/calculadora"
               onMouseEnter={heroCta.onMouseEnter}
               onMouseLeave={heroCta.onMouseLeave}
               style={{
@@ -274,9 +272,9 @@ export default function Home({ onNavigate }: SectionProps) {
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
               </svg>
               Cotiza tu auto
-            </a>
-            <a
-              {...clickableLink(() => onNavigate('juego'))}
+            </Link>
+            <Link
+              to="/juego"
               onMouseEnter={heroWa.onMouseEnter}
               onMouseLeave={heroWa.onMouseLeave}
               style={{
@@ -299,7 +297,7 @@ export default function Home({ onNavigate }: SectionProps) {
                 <path d="M5 12h14"></path>
                 <path d="M13 6l6 6-6 6"></path>
               </svg>
-            </a>
+            </Link>
           </div>
           <a
             href={WA_HREF}
@@ -441,9 +439,9 @@ export default function Home({ onNavigate }: SectionProps) {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 36 }}>
-            <a {...clickableLink(() => onNavigate('servicios'))} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
+            <Link to="/servicios" style={{ color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
               Conoce el proceso completo →
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -458,9 +456,9 @@ export default function Home({ onNavigate }: SectionProps) {
               </div>
               <h2 style={{ margin: 0, fontSize: 'clamp(28px,3.6vw,40px)', fontWeight: 800, fontStyle: 'italic' }}>Autos como estos puedes estrenar</h2>
             </div>
-            <a {...clickableLink(() => onNavigate('catalogo'))} style={{ cursor: 'pointer', color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
+            <Link to="/catalogo" style={{ color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
               Ver catálogo completo →
-            </a>
+            </Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24 }}>
             {homeCars.map((car, i) => (
@@ -602,8 +600,8 @@ export default function Home({ onNavigate }: SectionProps) {
         >
           <div style={{ color: '#fff', fontSize: 20, fontWeight: 800, fontStyle: 'italic' }}>¿Listo para dar el primer paso?</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            <a
-              {...clickableLink(() => onNavigate('calculadora'))}
+            <Link
+              to="/calculadora"
               onMouseEnter={midCta.onMouseEnter}
               onMouseLeave={midCta.onMouseLeave}
               style={{
@@ -621,9 +619,9 @@ export default function Home({ onNavigate }: SectionProps) {
               }}
             >
               Cotiza tu auto
-            </a>
-            <a
-              {...clickableLink(() => onNavigate('contacto'))}
+            </Link>
+            <Link
+              to="/contacto"
               onMouseEnter={midContacto.onMouseEnter}
               onMouseLeave={midContacto.onMouseLeave}
               style={{
@@ -641,7 +639,7 @@ export default function Home({ onNavigate }: SectionProps) {
               }}
             >
               Solicita información
-            </a>
+            </Link>
             <a
               href={WA_HREF}
               target="_blank"
@@ -805,8 +803,8 @@ export default function Home({ onNavigate }: SectionProps) {
             Calcula tu pago mensual en menos de un minuto o escríbenos directo por WhatsApp.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
-            <a
-              {...clickableLink(() => onNavigate('calculadora'))}
+            <Link
+              to="/calculadora"
               onMouseEnter={finalCta.onMouseEnter}
               onMouseLeave={finalCta.onMouseLeave}
               style={{
@@ -825,7 +823,7 @@ export default function Home({ onNavigate }: SectionProps) {
               }}
             >
               Cotiza ahora
-            </a>
+            </Link>
             <a
               href={WA_HREF}
               target="_blank"

@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import type { SectionProps } from '../lib/types';
 import { useCatalog } from '../lib/useCatalog';
 import Reveal from '../components/Reveal';
 import CarIcon from '../components/icons/CarIcon';
 
-export default function Catalogo({ onNavigate }: SectionProps) {
-  void onNavigate;
+export default function Catalogo() {
 
   const { cars } = useCatalog();
   const [hoverId, setHoverId] = useState<string | null>(null);

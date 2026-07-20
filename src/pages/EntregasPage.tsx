@@ -1,8 +1,4 @@
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import WhatsAppFloat from '../components/WhatsAppFloat';
 import Entregas from '../sections/Entregas';
-import { useCrossRouteNavigate } from '../lib/useCrossRouteNavigate';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 
 export default function EntregasPage() {
@@ -13,14 +9,5 @@ export default function EntregasPage() {
     canonical: 'https://www.construautodemexico.com.mx/entregas',
   });
 
-  const goToSection = useCrossRouteNavigate();
-
-  return (
-    <>
-      <Header page="entregas" onNavigate={goToSection} />
-      <Entregas onNavigate={goToSection} />
-      <Footer onNavigate={goToSection} />
-      <WhatsAppFloat />
-    </>
-  );
+  return <Entregas />;
 }

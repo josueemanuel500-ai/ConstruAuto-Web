@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import { clickableLink } from '../lib/a11y';
 
@@ -24,8 +23,7 @@ interface LeadRecord {
   fecha: string;
 }
 
-export default function Contacto({ onNavigate }: SectionProps) {
-  void onNavigate;
+export default function Contacto() {
 
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import type { SectionProps } from '../lib/types';
 import { useUpcomingDeliveries } from '../lib/useUpcomingDeliveries';
 import { useYoutubePlaylist } from '../lib/useYoutubePlaylist';
 import { waLink } from '../lib/whatsapp';
@@ -7,8 +6,7 @@ import { loadYouTubeApi, type YTPlayerInstance } from '../lib/youtubeApi';
 
 const waHref = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
-export default function Entregas({ onNavigate }: SectionProps) {
-  void onNavigate;
+export default function Entregas() {
 
   const { upcoming, configured } = useUpcomingDeliveries();
   const { videos, hasMore, loading, error, current, setCurrent, playing, setPlaying, loadMore } = useYoutubePlaylist();
