@@ -4,6 +4,8 @@ import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
 import { useCatalog } from '../lib/useCatalog';
 import { clickableLink } from '../lib/a11y';
+import Reveal from '../components/Reveal';
+import CarIcon from '../components/icons/CarIcon';
 
 const WA_HREF = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
@@ -456,36 +458,36 @@ export default function Home({ onNavigate }: SectionProps) {
             </a>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24 }}>
-            {homeCars.map((car) => (
-              <div
-                key={car.id}
-                className="ca-card-elevate"
-                style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: 18, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-              >
-                {car.isSlot ? (
-                  <div
-                    style={{
-                      width: '100%',
-                      height: 190,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'var(--ca-bg-light)',
-                      fontSize: 40,
-                    }}
-                    aria-label="Arrastra la foto del auto"
-                  >
-                    🚗
+            {homeCars.map((car, i) => (
+              <Reveal key={car.id} delayMs={Math.min(i, 8) * 40}>
+                <div
+                  className="ca-card-elevate"
+                  style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: 18, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
+                >
+                  {car.isSlot ? (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: 190,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'var(--ca-bg-light)',
+                      }}
+                      aria-label="Arrastra la foto del auto"
+                    >
+                      <CarIcon size={40} color="#FF9A5C" />
+                    </div>
+                  ) : (
+                    <img src={car.img} alt={car.name} style={{ width: '100%', height: 190, objectFit: 'cover', display: 'block', background: '#F5F6F8' }} />
+                  )}
+                  <div style={{ padding: '20px 22px 22px', display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
+                    <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9AA5B1' }}>{car.tipo}</div>
+                    <div style={{ fontSize: 20, fontWeight: 800 }}>{car.name}</div>
+                    <div style={{ fontSize: 17, fontWeight: 800, color: '#FF690F', marginTop: 2 }}>Monto aprox. {car.price}</div>
                   </div>
-                ) : (
-                  <img src={car.img} alt={car.name} style={{ width: '100%', height: 190, objectFit: 'cover', display: 'block', background: '#F5F6F8' }} />
-                )}
-                <div style={{ padding: '20px 22px 22px', display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9AA5B1' }}>{car.tipo}</div>
-                  <div style={{ fontSize: 20, fontWeight: 800 }}>{car.name}</div>
-                  <div style={{ fontSize: 17, fontWeight: 800, color: '#FF690F', marginTop: 2 }}>Monto aprox. {car.price}</div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

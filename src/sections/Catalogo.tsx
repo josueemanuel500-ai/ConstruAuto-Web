@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { SectionProps } from '../lib/types';
 import { useCatalog } from '../lib/useCatalog';
+import Reveal from '../components/Reveal';
+import CarIcon from '../components/icons/CarIcon';
 
 export default function Catalogo({ onNavigate }: SectionProps) {
   void onNavigate;
@@ -37,72 +39,73 @@ export default function Catalogo({ onNavigate }: SectionProps) {
       <section style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 24px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 26 }}>
-            {cars.map((car) => (
-              <div
-                key={car.id}
-                onMouseEnter={() => setHoverId(car.id)}
-                onMouseLeave={() => setHoverId(null)}
-                style={{
-                  background: '#fff',
-                  border: '1px solid #E5E7EB',
-                  borderRadius: 18,
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  boxShadow: hoverId === car.id ? '0 12px 32px rgba(31,41,51,0.10)' : 'none',
-                  transition: 'box-shadow 0.25s ease',
-                }}
-              >
-                {!car.isSlot && car.img ? (
-                  <img
-                    src={car.img}
-                    alt={car.name}
-                    loading="lazy"
-                    style={{ width: '100%', height: 210, objectFit: 'cover', display: 'block', background: '#F5F6F8' }}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: '100%',
-                      height: 210,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'var(--ca-bg-light)',
-                      fontSize: 48,
-                    }}
-                  >
-                    🚗
+            {cars.map((car, i) => (
+              <Reveal key={car.id} delayMs={Math.min(i, 8) * 40}>
+                <div
+                  onMouseEnter={() => setHoverId(car.id)}
+                  onMouseLeave={() => setHoverId(null)}
+                  style={{
+                    background: '#fff',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: 18,
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    boxShadow: hoverId === car.id ? '0 12px 32px rgba(31,41,51,0.10)' : 'none',
+                    transform: hoverId === car.id ? 'translateY(-4px)' : 'none',
+                    transition: 'box-shadow 0.25s ease, transform 0.25s ease',
+                  }}
+                >
+                  {!car.isSlot && car.img ? (
+                    <img
+                      src={car.img}
+                      alt={car.name}
+                      loading="lazy"
+                      style={{ width: '100%', height: 210, objectFit: 'cover', display: 'block', background: '#F5F6F8' }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: 210,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'var(--ca-bg-light)',
+                      }}
+                    >
+                      <CarIcon size={48} color="#FF9A5C" />
+                    </div>
+                  )}
+                  <div style={{ padding: '22px 24px 24px', display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
+                    <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9AA5B1' }}>
+                      {car.tipo}
+                    </div>
+                    <div style={{ fontSize: 21, fontWeight: 800 }}>{car.name}</div>
+                    <div style={{ fontSize: 18, fontWeight: 800, color: '#FF690F' }}>Monto aprox. {car.price}</div>
+                    <a
+                      href={car.waHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      onMouseEnter={() => setBtnHoverId(car.id)}
+                      onMouseLeave={() => setBtnHoverId(null)}
+                      style={{
+                        marginTop: 14,
+                        background: btnHoverId === car.id ? '#FF690F' : '#1F2933',
+                        color: '#fff',
+                        fontWeight: 800,
+                        fontSize: 15.5,
+                        padding: 13,
+                        borderRadius: 11,
+                        textAlign: 'center',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      Me interesa este auto
+                    </a>
                   </div>
-                )}
-                <div style={{ padding: '22px 24px 24px', display: 'flex', flexDirection: 'column', gap: 6, flex: 1 }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9AA5B1' }}>
-                    {car.tipo}
-                  </div>
-                  <div style={{ fontSize: 21, fontWeight: 800 }}>{car.name}</div>
-                  <div style={{ fontSize: 18, fontWeight: 800, color: '#FF690F' }}>Monto aprox. {car.price}</div>
-                  <a
-                    href={car.waHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    onMouseEnter={() => setBtnHoverId(car.id)}
-                    onMouseLeave={() => setBtnHoverId(null)}
-                    style={{
-                      marginTop: 14,
-                      background: btnHoverId === car.id ? '#FF690F' : '#1F2933',
-                      color: '#fff',
-                      fontWeight: 800,
-                      fontSize: 15.5,
-                      padding: 13,
-                      borderRadius: 11,
-                      textAlign: 'center',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    Me interesa este auto
-                  </a>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
           <div

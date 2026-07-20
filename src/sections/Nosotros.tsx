@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { SectionProps } from '../lib/types';
 import { waLink } from '../lib/whatsapp';
+import Reveal from '../components/Reveal';
 
 const WA_HREF = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
@@ -77,25 +78,27 @@ export default function Nosotros({ onNavigate }: SectionProps) {
       <section style={{ background: '#fff' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '72px 24px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 24, marginBottom: 64 }}>
-            {VALUES.map((v) => (
-              <div key={v.title} style={{ background: '#F5F6F8', borderRadius: 18, padding: '32px 28px' }}>
-                <div
-                  style={{
-                    width: 46,
-                    height: 46,
-                    borderRadius: 12,
-                    background: '#FFF0E6',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 18,
-                  }}
-                >
-                  {v.icon}
+            {VALUES.map((v, i) => (
+              <Reveal key={v.title} delayMs={i * 60}>
+                <div style={{ background: '#F5F6F8', borderRadius: 18, padding: '32px 28px' }}>
+                  <div
+                    style={{
+                      width: 46,
+                      height: 46,
+                      borderRadius: 12,
+                      background: '#FFF0E6',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: 18,
+                    }}
+                  >
+                    {v.icon}
+                  </div>
+                  <h3 style={{ margin: '0 0 8px', fontSize: 20, fontWeight: 800 }}>{v.title}</h3>
+                  <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.6, color: '#52606D' }}>{v.desc}</p>
                 </div>
-                <h3 style={{ margin: '0 0 8px', fontSize: 20, fontWeight: 800 }}>{v.title}</h3>
-                <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.6, color: '#52606D' }}>{v.desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
 

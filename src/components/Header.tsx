@@ -134,7 +134,7 @@ export default function Header({ page, onNavigate }: HeaderProps) {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menú"
             aria-expanded={menuOpen}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8, display: 'flex', alignItems: 'center' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F2933" strokeWidth="2.4" strokeLinecap="round">
               <line x1="3" y1="6" x2="21" y2="6"></line>
