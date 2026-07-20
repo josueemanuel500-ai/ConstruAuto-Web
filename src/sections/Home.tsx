@@ -196,18 +196,20 @@ export default function Home() {
     <main data-screen-label="Inicio" style={{ animation: 'caFadeUp 0.4s ease' }}>
       {/* HERO */}
       <style>{`
-        .ca-hero2 { position: relative; margin-top: -72px; min-height: 100vh; overflow: hidden; background: #0D1217; color: #fff;
+        .ca-hero2 { position: relative; margin-top: -72px; min-height: 100vh; overflow: hidden; background: #F5F6F8; color: #1F2933;
           display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 152px 24px 56px; }
         .ca-hero2-bgimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
         .ca-hero2-bgtext { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center;
           text-align: center; padding: 0 4vw; pointer-events: none; user-select: none; }
         .ca-hero2-stat { position: absolute; top: 152px; left: 24px; max-width: 300px; z-index: 3;
-          background: rgba(13,18,23,0.55); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
-          border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 18px 20px; }
+          background: rgba(255,255,255,0.7); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+          border: 1px solid rgba(31,41,51,0.08); border-radius: 18px; padding: 18px 20px; box-shadow: 0 12px 32px rgba(31,41,51,0.08); }
         .ca-hero2-copy { position: absolute; left: 24px; bottom: 40px; max-width: 480px; z-index: 3;
-          background: rgba(13,18,23,0.55); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
-          border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 22px 24px; }
-        .ca-hero2-detail { position: absolute; right: 24px; bottom: 40px; width: 208px; z-index: 3; }
+          background: rgba(255,255,255,0.7); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+          border: 1px solid rgba(31,41,51,0.08); border-radius: 20px; padding: 22px 24px; box-shadow: 0 12px 32px rgba(31,41,51,0.08); }
+        .ca-hero2-detail { position: absolute; right: 24px; bottom: 40px; width: 208px; z-index: 3;
+          background: rgba(255,255,255,0.7); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+          border: 1px solid rgba(31,41,51,0.08); border-radius: 18px; padding: 14px; box-shadow: 0 12px 32px rgba(31,41,51,0.08); }
         @media (max-width: 900px) {
           .ca-hero2 { padding: 116px 20px 40px; }
           .ca-hero2-bgtext { position: static; margin-bottom: 24px; }
@@ -219,8 +221,8 @@ export default function Home() {
       <section className="ca-hero2">
         <img
           className="ca-hero2-bgimg"
-          src="/assets/hero-canvas-prueba.jpg"
-          alt="ConstruAuto de México — la oportunidad está en tus manos"
+          src="/assets/hero-canvas-nissan.jpg"
+          alt="Nissan Navara entregada por ConstruAuto de México"
         />
         <div
           aria-hidden="true"
@@ -228,8 +230,7 @@ export default function Home() {
             position: 'absolute',
             inset: 0,
             zIndex: 1,
-            background:
-              'radial-gradient(120% 90% at 50% 0%, rgba(255,105,15,0.14), transparent 55%), linear-gradient(180deg, rgba(11,16,21,0.55) 0%, rgba(11,16,21,0.35) 40%, rgba(11,16,21,0.75) 100%)',
+            background: 'linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 30%, transparent 65%, rgba(255,255,255,0.4) 100%)',
           }}
         />
 
@@ -243,12 +244,12 @@ export default function Home() {
               fontStyle: 'italic',
               letterSpacing: '-0.02em',
               textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.9)',
+              color: 'rgba(31,41,51,0.16)',
             }}
           >
             Estrena sin
             <br />
-            enganche<span style={{ color: '#FF690F' }}>,</span> es solo
+            enganche<span style={{ color: 'rgba(255,105,15,0.5)' }}>,</span> es solo
             <br />
             el comienzo
           </h1>
@@ -260,12 +261,12 @@ export default function Home() {
               <path d="M12 19V5"></path>
               <path d="M6 11l6-6 6 6"></path>
             </svg>
-            <span style={{ fontSize: 'clamp(30px,4vw,44px)', fontWeight: 800, fontStyle: 'italic', lineHeight: 1 }}>{STAT_TARGETS.entregas}+</span>
-            <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#CBD2D9', maxWidth: 110, lineHeight: 1.3 }}>
+            <span style={{ fontSize: 'clamp(30px,4vw,44px)', fontWeight: 800, fontStyle: 'italic', lineHeight: 1, color: '#1F2933' }}>{STAT_TARGETS.entregas}+</span>
+            <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#3E4C59', maxWidth: 110, lineHeight: 1.3 }}>
               Vehículos entregados
             </span>
           </div>
-          <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: '#9AA5B1' }}>
+          <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: '#52606D' }}>
             Familias que ya estrenaron su auto con nuestro autofinanciamiento en Mérida, Yucatán.
           </p>
         </div>
@@ -279,6 +280,7 @@ export default function Home() {
               fontStyle: 'italic',
               textTransform: 'uppercase',
               lineHeight: 1.2,
+              color: '#1F2933',
             }}
           >
             Autofinanciamiento claro para tu próximo auto
@@ -315,9 +317,9 @@ export default function Home() {
                 alignItems: 'center',
                 gap: 10,
                 cursor: 'pointer',
-                background: heroWa.hover ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.08)',
-                border: '1.5px solid rgba(255,255,255,0.4)',
-                color: '#fff',
+                background: heroWa.hover ? 'rgba(31,41,51,0.08)' : 'transparent',
+                border: '1.5px solid rgba(31,41,51,0.3)',
+                color: '#1F2933',
                 fontWeight: 700,
                 fontSize: 15.5,
                 padding: '14px 24px',
@@ -332,13 +334,13 @@ export default function Home() {
             href={WA_HREF}
             target="_blank"
             rel="noreferrer"
-            style={{ display: 'block', marginTop: 18, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
+            style={{ display: 'block', marginTop: 18, fontSize: 14, fontWeight: 600, color: '#52606D', textDecoration: 'none' }}
           >
             Atención al instante por WhatsApp · 999 356 4692
           </a>
         </div>
 
-        <Link to="/entregas" className="ca-hero2-detail" style={{ textDecoration: 'none', color: '#fff' }}>
+        <Link to="/entregas" className="ca-hero2-detail" style={{ textDecoration: 'none', color: '#1F2933' }}>
           <div
             style={{
               display: 'flex',
@@ -350,15 +352,15 @@ export default function Home() {
             }}
           >
             Entregas reales
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1F2933" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M7 17L17 7"></path>
               <path d="M9 7h8v8"></path>
             </svg>
           </div>
           <div
             style={{
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.14)',
+              background: 'rgba(31,41,51,0.05)',
+              border: '1px solid rgba(31,41,51,0.1)',
               borderRadius: 16,
               padding: 14,
               display: 'flex',
