@@ -79,7 +79,7 @@ export default function Header() {
         }}
       >
         <Link to="/" onClick={logoTap} aria-label="Ir al inicio" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
-          <img src="/assets/logo-color.png" alt="ConstruAuto de México" style={{ height: 34, display: 'block' }} />
+          <img src="/assets/logo-color.png" alt="ConstruAuto de México" style={{ height: 28, display: 'block' }} />
         </Link>
 
         {!isMobile && (

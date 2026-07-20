@@ -209,8 +209,8 @@ export default function Home() {
           background: rgba(255,255,255,0.7); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
           border: 1px solid rgba(31,41,51,0.08); border-radius: 18px; padding: 14px; box-shadow: 0 12px 32px rgba(31,41,51,0.08); }
         @media (max-width: 900px) {
-          .ca-hero2 { padding: 116px 20px 40px; min-height: auto; }
-          .ca-hero2-bgimg { position: static; margin-bottom: 20px; }
+          .ca-hero2 { padding: 0 20px 40px; min-height: auto; }
+          .ca-hero2-bgimg { position: static; width: calc(100% + 40px); margin: 0 -20px 20px; }
           .ca-hero2-stat { position: static; max-width: none; margin-bottom: 20px; }
           .ca-hero2-copy { position: static; max-width: none; margin-bottom: 0; }
           .ca-hero2-detail { display: none; }
