@@ -244,12 +244,17 @@ export default function Home() {
               fontStyle: 'italic',
               letterSpacing: '-0.02em',
               textTransform: 'uppercase',
-              color: 'rgba(31,41,51,0.16)',
+              background: 'linear-gradient(135deg, #f5a218, #e3710e)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+              WebkitTextFillColor: 'transparent',
+              filter: 'drop-shadow(0 4px 18px rgba(31,41,51,0.25))',
             }}
           >
             Estrena sin
             <br />
-            enganche<span style={{ color: 'rgba(255,105,15,0.5)' }}>,</span> es solo
+            enganche, es solo
             <br />
             el comienzo
           </h1>
