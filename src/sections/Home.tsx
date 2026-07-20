@@ -195,59 +195,107 @@ export default function Home() {
   return (
     <main data-screen-label="Inicio" style={{ animation: 'caFadeUp 0.4s ease' }}>
       {/* HERO */}
-      <section
-        style={{
-          position: 'relative',
-          marginTop: -72,
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          overflow: 'hidden',
-          background: '#0D1217',
-          color: '#fff',
-        }}
-      >
+      <style>{`
+        .ca-hero2 { position: relative; margin-top: -72px; min-height: 100vh; overflow: hidden; background: #0D1217; color: #fff;
+          display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 152px 24px 56px; }
+        .ca-hero2-bgtext { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center;
+          text-align: center; padding: 0 4vw; pointer-events: none; user-select: none; }
+        .ca-hero2-stat { position: absolute; top: 152px; left: 24px; max-width: 300px; z-index: 3; }
+        .ca-hero2-canvas { position: relative; z-index: 2; width: min(400px, 78vw); aspect-ratio: 3 / 4; }
+        .ca-hero2-copy { position: absolute; left: 24px; bottom: 88px; max-width: 480px; z-index: 3; }
+        .ca-hero2-detail { position: absolute; right: 24px; bottom: 40px; width: 208px; z-index: 3; }
+        @media (max-width: 900px) {
+          .ca-hero2 { padding: 116px 20px 40px; }
+          .ca-hero2-bgtext { position: static; margin-bottom: 24px; }
+          .ca-hero2-stat { position: static; max-width: none; margin-bottom: 24px; }
+          .ca-hero2-canvas { width: min(300px, 70vw); margin-bottom: 24px; }
+          .ca-hero2-copy { position: static; max-width: none; margin-bottom: 0; }
+          .ca-hero2-detail { display: none; }
+        }
+      `}</style>
+      <section className="ca-hero2">
         <div
           aria-hidden="true"
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: 'url(/assets/hero-frames/ezgif-frame-001.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            background: 'radial-gradient(120% 90% at 50% 0%, rgba(255,105,15,0.14), transparent 55%)',
           }}
         />
+
+        <div className="ca-hero2-bgtext">
+          <h1
+            style={{
+              margin: 0,
+              fontSize: 'clamp(32px,6.4vw,80px)',
+              lineHeight: 0.98,
+              fontWeight: 800,
+              fontStyle: 'italic',
+              letterSpacing: '-0.02em',
+              textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.9)',
+            }}
+          >
+            Estrena sin
+            <br />
+            enganche<span style={{ color: '#FF690F' }}>,</span> es solo
+            <br />
+            el comienzo
+          </h1>
+        </div>
+
+        <div className="ca-hero2-stat">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF690F" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 19V5"></path>
+              <path d="M6 11l6-6 6 6"></path>
+            </svg>
+            <span style={{ fontSize: 'clamp(30px,4vw,44px)', fontWeight: 800, fontStyle: 'italic', lineHeight: 1 }}>{STAT_TARGETS.entregas}+</span>
+            <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#CBD2D9', maxWidth: 110, lineHeight: 1.3 }}>
+              Vehículos entregados
+            </span>
+          </div>
+          <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: '#9AA5B1' }}>
+            Familias que ya estrenaron su auto con nuestro autofinanciamiento en Mérida, Yucatán.
+          </p>
+        </div>
+
         <div
-          aria-hidden="true"
+          className="ca-hero2-canvas"
           style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'radial-gradient(120% 90% at 50% 0%, rgba(255,105,15,0.14), transparent 55%), linear-gradient(rgba(11,16,21,0.82) 0%, rgba(11,16,21,0.86) 55%, rgba(11,16,21,0.94) 100%)',
-          }}
-        />
-        <div
-          style={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: 860,
-            margin: '0 auto',
-            padding: '120px 24px 104px',
-            textAlign: 'center',
+            background: 'rgba(255,255,255,0.04)',
+            border: '1.5px dashed rgba(255,255,255,0.3)',
+            borderRadius: 24,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'center',
+            gap: 14,
+            padding: 24,
+            textAlign: 'center',
           }}
         >
-          <h1 style={{ margin: '0 0 24px', fontSize: 'clamp(42px,7vw,88px)', lineHeight: 1.0, fontWeight: 800, fontStyle: 'italic', letterSpacing: '-0.02em' }}>
-            Estrena sin enganche<span style={{ color: '#FF690F' }}>.</span>
-          </h1>
-          <div style={{ width: 64, height: 4, borderRadius: 2, background: '#FF690F', marginBottom: 28 }} />
-          <p style={{ margin: '0 0 36px', fontSize: 'clamp(17px,2.2vw,20px)', lineHeight: 1.6, color: '#E4E7EB', maxWidth: 620 }}>
-            Autofinanciamiento de autos usados y seminuevos en Mérida, Yucatán. Desde <strong style={{ color: '#fff' }}>$30,000</strong> hasta{' '}
-            <strong style={{ color: '#fff' }}>$150,000 MXN</strong>, con plazos de 12 a 60 meses y atención directa.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
+          <CarIcon size={44} color="#FF9A5C" />
+          <div style={{ fontWeight: 800, fontSize: 16, color: '#fff' }}>Tu imagen aquí</div>
+          <div style={{ fontSize: 13, lineHeight: 1.5, color: '#9AA5B1', maxWidth: 220 }}>
+            Reemplaza este bloque con la foto del auto o cliente que quieras destacar en Inicio.
+          </div>
+        </div>
+
+        <div className="ca-hero2-copy">
+          <h2
+            style={{
+              margin: '0 0 18px',
+              fontSize: 'clamp(20px,2.6vw,28px)',
+              fontWeight: 800,
+              fontStyle: 'italic',
+              textTransform: 'uppercase',
+              lineHeight: 1.2,
+            }}
+          >
+            Autofinanciamiento claro para tu próximo auto
+          </h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
             <Link
               to="/calculadora"
               onMouseEnter={heroCta.onMouseEnter}
@@ -260,17 +308,14 @@ export default function Home() {
                 background: heroCta.hover ? '#E55A05' : '#FF690F',
                 color: '#fff',
                 fontWeight: 800,
-                fontSize: 17,
-                padding: '16px 30px',
-                borderRadius: 12,
+                fontSize: 15.5,
+                padding: '14px 26px',
+                borderRadius: 999,
                 textDecoration: 'none',
                 boxShadow: '0 10px 28px rgba(255,105,15,0.35)',
                 transform: heroCta.hover ? 'translateY(-2px)' : 'none',
               }}
             >
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
               Cotiza tu auto
             </Link>
             <Link
@@ -286,48 +331,57 @@ export default function Home() {
                 border: '1.5px solid rgba(255,255,255,0.4)',
                 color: '#fff',
                 fontWeight: 700,
-                fontSize: 17,
-                padding: '16px 26px',
-                borderRadius: 12,
+                fontSize: 15.5,
+                padding: '14px 24px',
+                borderRadius: 999,
                 textDecoration: 'none',
               }}
             >
               Ver promociones
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M13 6l6 6-6 6"></path>
-              </svg>
             </Link>
           </div>
           <a
             href={WA_HREF}
             target="_blank"
             rel="noreferrer"
-            style={{ marginTop: 24, fontSize: 14.5, fontWeight: 600, color: 'rgba(255,255,255,0.75)', textDecoration: 'none' }}
+            style={{ display: 'block', marginTop: 18, fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
           >
             Atención al instante por WhatsApp · 999 356 4692
           </a>
         </div>
-        <button
-          onClick={() => window.scrollTo({ top: window.innerHeight - 60, behavior: 'smooth' })}
-          aria-label="Bajar"
-          style={{
-            position: 'absolute',
-            bottom: 22,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: 8,
-            color: 'rgba(255,255,255,0.85)',
-            animation: 'caFloat 2.4s ease-in-out infinite',
-          }}
-        >
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 9l6 6 6-6"></path>
-          </svg>
-        </button>
+
+        <Link to="/entregas" className="ca-hero2-detail" style={{ textDecoration: 'none', color: '#fff' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 10,
+              fontSize: 13.5,
+              fontWeight: 700,
+            }}
+          >
+            Entregas reales
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 17L17 7"></path>
+              <path d="M9 7h8v8"></path>
+            </svg>
+          </div>
+          <div
+            style={{
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              borderRadius: 16,
+              padding: 14,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              aspectRatio: '4/3',
+            }}
+          >
+            <CarIcon size={30} color="#9AA5B1" />
+          </div>
+        </Link>
       </section>
 
       {/* STATS */}
