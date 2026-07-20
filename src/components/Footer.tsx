@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { NAV_ITEMS, type Page } from '../lib/pages';
 import { waLink } from '../lib/whatsapp';
 
@@ -31,16 +32,27 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div>
             <div style={{ color: '#fff', fontWeight: 800, fontSize: 15, marginBottom: 14 }}>Sitio</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-              {NAV_ITEMS.map((ni) => (
-                <a
-                  key={ni.key}
-                  onClick={() => onNavigate(ni.key)}
-                  className="ca-nav-link"
-                  style={{ color: '#9AA5B1', fontSize: 14.5, textDecoration: 'none' }}
-                >
-                  {ni.label}
-                </a>
-              ))}
+              {NAV_ITEMS.map((ni) =>
+                ni.key === 'entregas' ? (
+                  <Link
+                    key={ni.key}
+                    to="/entregas"
+                    className="ca-nav-link"
+                    style={{ color: '#9AA5B1', fontSize: 14.5, textDecoration: 'none' }}
+                  >
+                    {ni.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={ni.key}
+                    onClick={() => onNavigate(ni.key)}
+                    className="ca-nav-link"
+                    style={{ color: '#9AA5B1', fontSize: 14.5, textDecoration: 'none' }}
+                  >
+                    {ni.label}
+                  </a>
+                ),
+              )}
             </div>
           </div>
           <div>

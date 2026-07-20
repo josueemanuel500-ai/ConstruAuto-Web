@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { NAV_ITEMS, type Page } from '../lib/pages';
 
 interface HeaderProps {
@@ -92,22 +93,26 @@ export default function Header({ page, onNavigate }: HeaderProps) {
         {!isMobile && (
           <>
             <nav style={{ display: 'flex', alignItems: 'center', gap: 22, minWidth: 0 }}>
-              {NAV_ITEMS.map((ni) => (
-                <a
-                  key={ni.key}
-                  onClick={() => go(ni.key)}
-                  className="ca-nav-link"
-                  style={{
-                    fontSize: 15,
-                    letterSpacing: '0.01em',
-                    fontWeight: page === ni.key ? 800 : 600,
-                    color: page === ni.key ? navColorActive : navColorIdle,
-                    transition: 'color 0.35s ease',
-                  }}
-                >
-                  {ni.label}
-                </a>
-              ))}
+              {NAV_ITEMS.map((ni) => {
+                const navLinkStyle = {
+                  fontSize: 15,
+                  letterSpacing: '0.01em',
+                  fontWeight: page === ni.key ? 800 : 600,
+                  color: page === ni.key ? navColorActive : navColorIdle,
+                  transition: 'color 0.35s ease',
+                  textDecoration: 'none',
+                } as const;
+
+                return ni.key === 'entregas' ? (
+                  <Link key={ni.key} to="/entregas" className="ca-nav-link" style={navLinkStyle}>
+                    {ni.label}
+                  </Link>
+                ) : (
+                  <a key={ni.key} onClick={() => go(ni.key)} className="ca-nav-link" style={navLinkStyle}>
+                    {ni.label}
+                  </a>
+                );
+              })}
             </nav>
             <a
               onClick={() => go('calculadora')}
@@ -155,23 +160,28 @@ export default function Header({ page, onNavigate }: HeaderProps) {
             gap: 2,
           }}
         >
-          {NAV_ITEMS.map((ni) => (
-            <a
-              key={ni.key}
-              onClick={() => go(ni.key)}
-              style={{
-                cursor: 'pointer',
-                fontSize: 17,
-                padding: '12px 4px',
-                borderBottom: '1px solid #F3F4F6',
-                textDecoration: 'none',
-                fontWeight: page === ni.key ? 800 : 600,
-                color: page === ni.key ? '#FF690F' : '#1F2933',
-              }}
-            >
-              {ni.label}
-            </a>
-          ))}
+          {NAV_ITEMS.map((ni) => {
+            const mobileLinkStyle = {
+              cursor: 'pointer',
+              fontSize: 17,
+              padding: '12px 4px',
+              borderBottom: '1px solid #F3F4F6',
+              textDecoration: 'none',
+              fontWeight: page === ni.key ? 800 : 600,
+              color: page === ni.key ? '#FF690F' : '#1F2933',
+              display: 'block',
+            } as const;
+
+            return ni.key === 'entregas' ? (
+              <Link key={ni.key} to="/entregas" style={mobileLinkStyle} onClick={() => setMenuOpen(false)}>
+                {ni.label}
+              </Link>
+            ) : (
+              <a key={ni.key} onClick={() => go(ni.key)} style={mobileLinkStyle}>
+                {ni.label}
+              </a>
+            );
+          })}
           <a
             onClick={() => go('calculadora')}
             style={{
