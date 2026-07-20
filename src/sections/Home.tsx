@@ -198,7 +198,7 @@ export default function Home() {
       <style>{`
         .ca-hero2 { position: relative; margin-top: -72px; min-height: 100vh; overflow: hidden; background: #F5F6F8; color: #1F2933;
           display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 152px 24px 56px; }
-        .ca-hero2-bgimg { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 100%; height: auto; aspect-ratio: 2000 / 837; z-index: 0; }
+        .ca-hero2-bgimg { position: absolute; left: 0; top: 0; width: 100%; height: auto; aspect-ratio: 2000 / 837; z-index: 0; }
         .ca-hero2-stat { position: absolute; top: 152px; left: 24px; max-width: 300px; z-index: 3;
           background: rgba(255,255,255,0.7); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
           border: 1px solid rgba(31,41,51,0.08); border-radius: 18px; padding: 18px 20px; box-shadow: 0 12px 32px rgba(31,41,51,0.08); }
@@ -210,18 +210,21 @@ export default function Home() {
           border: 1px solid rgba(31,41,51,0.08); border-radius: 18px; padding: 14px; box-shadow: 0 12px 32px rgba(31,41,51,0.08); }
         @media (max-width: 900px) {
           .ca-hero2 { padding: 116px 20px 40px; min-height: auto; }
-          .ca-hero2-bgimg { position: static; transform: none; margin-bottom: 20px; }
+          .ca-hero2-bgimg { position: static; margin-bottom: 20px; }
           .ca-hero2-stat { position: static; max-width: none; margin-bottom: 20px; }
           .ca-hero2-copy { position: static; max-width: none; margin-bottom: 0; }
           .ca-hero2-detail { display: none; }
         }
       `}</style>
       <section className="ca-hero2">
-        <img
-          className="ca-hero2-bgimg"
-          src="/assets/hero-canvas-nissan.jpg"
-          alt="Nissan Navara entregada por ConstruAuto de México"
-        />
+        <picture>
+          <source media="(min-width: 901px)" srcSet="/assets/hero-canvas-nissan.jpg" />
+          <img
+            className="ca-hero2-bgimg"
+            src="/assets/hero-canvas-nissan-mobile.jpg"
+            alt="Nissan Navara entregada por ConstruAuto de México"
+          />
+        </picture>
         <div
           aria-hidden="true"
           style={{
