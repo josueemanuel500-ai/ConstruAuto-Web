@@ -198,12 +198,12 @@ export default function Home() {
       <style>{`
         .ca-hero2 { position: relative; margin-top: -72px; min-height: 100vh; overflow: hidden; background: #0D1217; color: #fff;
           display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 152px 24px 56px; }
-        .ca-hero2-bgtext { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center;
+        .ca-hero2-bgimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
+        .ca-hero2-bgtext { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center;
           text-align: center; padding: 0 4vw; pointer-events: none; user-select: none; }
         .ca-hero2-stat { position: absolute; top: 152px; left: 24px; max-width: 300px; z-index: 3;
           background: rgba(13,18,23,0.55); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
           border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 18px 20px; }
-        .ca-hero2-canvas { position: relative; z-index: 2; height: min(760px, 80vh); aspect-ratio: 3 / 4; }
         .ca-hero2-copy { position: absolute; left: 24px; bottom: 40px; max-width: 480px; z-index: 3;
           background: rgba(13,18,23,0.55); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
           border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 22px 24px; }
@@ -212,18 +212,24 @@ export default function Home() {
           .ca-hero2 { padding: 116px 20px 40px; }
           .ca-hero2-bgtext { position: static; margin-bottom: 24px; }
           .ca-hero2-stat { position: static; max-width: none; margin-bottom: 20px; }
-          .ca-hero2-canvas { width: min(90vw, 420px); height: auto; margin-bottom: 20px; }
           .ca-hero2-copy { position: static; max-width: none; margin-bottom: 0; }
           .ca-hero2-detail { display: none; }
         }
       `}</style>
       <section className="ca-hero2">
+        <img
+          className="ca-hero2-bgimg"
+          src="/assets/hero-canvas-prueba.jpg"
+          alt="ConstruAuto de México — la oportunidad está en tus manos"
+        />
         <div
           aria-hidden="true"
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'radial-gradient(120% 90% at 50% 0%, rgba(255,105,15,0.14), transparent 55%)',
+            zIndex: 1,
+            background:
+              'radial-gradient(120% 90% at 50% 0%, rgba(255,105,15,0.14), transparent 55%), linear-gradient(180deg, rgba(11,16,21,0.55) 0%, rgba(11,16,21,0.35) 40%, rgba(11,16,21,0.75) 100%)',
           }}
         />
 
@@ -262,14 +268,6 @@ export default function Home() {
           <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: '#9AA5B1' }}>
             Familias que ya estrenaron su auto con nuestro autofinanciamiento en Mérida, Yucatán.
           </p>
-        </div>
-
-        <div className="ca-hero2-canvas" style={{ borderRadius: 24, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.45)' }}>
-          <img
-            src="/assets/hero-canvas-prueba.jpg"
-            alt="ConstruAuto de México — la oportunidad está en tus manos"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          />
         </div>
 
         <div className="ca-hero2-copy">
