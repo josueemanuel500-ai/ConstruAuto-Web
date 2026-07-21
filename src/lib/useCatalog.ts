@@ -12,13 +12,12 @@ export interface CatalogCar {
   waHref: string;
 }
 
-const DEFAULT_CARS: { model: string; year: string; amount: number; tipo: string; id: string }[] = [
-  { id: 'car-aveo', model: 'Chevrolet Aveo', year: '2015', amount: 110000, tipo: 'Sedán' },
-  { id: 'car-spark', model: 'Chevrolet Spark', year: '2013', amount: 95000, tipo: 'Hatchback' },
-  { id: 'car-jetta', model: 'Volkswagen Jetta Clásico', year: '', amount: 110000, tipo: 'Sedán' },
-  { id: 'car-mazda3', model: 'Mazda 3', year: '2010', amount: 150000, tipo: 'Sedán' },
-  { id: 'car-ranger', model: 'Ford Ranger', year: '1998', amount: 90000, tipo: 'Pickup' },
-  { id: 'car-monza', model: 'Chevrolet Monza', year: '', amount: 75000, tipo: 'Sedán' },
+const DEFAULT_CARS: { model: string; year: string; amount: number; tipo: string; id: string; img: string }[] = [
+  { id: 'car-aveo-2014', model: 'Chevrolet Aveo', year: '2014', amount: 90000, tipo: 'Sedán', img: '/assets/catalog/aveo-2014.jpg' },
+  { id: 'car-aveo-2015', model: 'Chevrolet Aveo', year: '2015', amount: 100000, tipo: 'Sedán', img: '/assets/catalog/aveo-2015.jpg' },
+  { id: 'car-spark-2013', model: 'Chevrolet Spark', year: '2013', amount: 85000, tipo: 'Hatchback', img: '/assets/catalog/spark-2013.jpg' },
+  { id: 'car-monza', model: 'Chevrolet Monza', year: '', amount: 70000, tipo: 'Sedán', img: '/assets/catalog/monza.jpg' },
+  { id: 'car-civic-2003', model: 'Honda Civic', year: '2003', amount: 65000, tipo: 'Sedán', img: '/assets/catalog/civic-2003.jpg' },
 ];
 
 function toCar(model: string, year: string, amount: number, tipo: string, img: string, id: string): CatalogCar {
@@ -68,7 +67,7 @@ export function useCatalog(): { cars: CatalogCar[]; fromDb: boolean } {
   const useDb = Array.isArray(dbItems) && dbItems.length > 0;
   const cars = useDb
     ? (dbItems as CatalogoItem[]).map((c, i) => toCar(c.model, c.year, c.amount, c.tipo, c.img, c.id || String(i)))
-    : DEFAULT_CARS.map((c) => toCar(c.model, c.year, c.amount, c.tipo, '', c.id));
+    : DEFAULT_CARS.map((c) => toCar(c.model, c.year, c.amount, c.tipo, c.img, c.id));
 
   return { cars, fromDb: useDb };
 }
