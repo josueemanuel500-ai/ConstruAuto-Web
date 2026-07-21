@@ -1,9 +1,24 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { NAV_ITEMS } from '../lib/pages';
 import { waLink } from '../lib/whatsapp';
 
 export default function Footer() {
   const waHref = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
+  const logoTaps = useRef(0);
+  const logoTapTimer = useRef<number | undefined>(undefined);
+
+  function logoTap() {
+    logoTaps.current += 1;
+    window.clearTimeout(logoTapTimer.current);
+    logoTapTimer.current = window.setTimeout(() => {
+      logoTaps.current = 0;
+    }, 3000);
+    if (logoTaps.current >= 7) {
+      logoTaps.current = 0;
+      window.location.href = 'admin.html';
+    }
+  }
 
   return (
     <footer style={{ background: '#1F2933', color: '#9AA5B1' }}>
@@ -19,7 +34,9 @@ export default function Footer() {
           }}
         >
           <div style={{ maxWidth: 320 }}>
-            <img src="/assets/logo-blanco.png" alt="ConstruAuto de México" style={{ height: 32, display: 'block', marginBottom: 16 }} />
+            <Link to="/" onClick={logoTap} aria-label="Ir al inicio" style={{ display: 'inline-block' }}>
+              <img src="/assets/logo-blanco.png" alt="ConstruAuto de México" style={{ height: 32, display: 'block', marginBottom: 16 }} />
+            </Link>
             <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6 }}>
               Autofinanciamiento de autos usados y seminuevos en Mérida, Yucatán. Financiamiento de $30,000 a $150,000 MXN.
               Trámite claro, entrega real.

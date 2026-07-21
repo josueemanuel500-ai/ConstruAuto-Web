@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { NAV_ITEMS } from '../lib/pages';
 
@@ -7,8 +7,6 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const logoTaps = useRef(0);
-  const logoTapTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 1120px)');
@@ -27,19 +25,6 @@ export default function Header() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  function logoTap() {
-    setMenuOpen(false);
-    logoTaps.current += 1;
-    window.clearTimeout(logoTapTimer.current);
-    logoTapTimer.current = window.setTimeout(() => {
-      logoTaps.current = 0;
-    }, 3000);
-    if (logoTaps.current >= 7) {
-      logoTaps.current = 0;
-      window.location.href = 'admin.html';
-    }
-  }
 
   // En el hero de Inicio (arriba de todo) el menú está oculto; aparece al hacer scroll.
   // En el resto de páginas siempre está visible.
@@ -78,7 +63,12 @@ export default function Header() {
           gap: 20,
         }}
       >
-        <Link to="/" onClick={logoTap} aria-label="Ir al inicio" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}>
+        <Link
+          to="/"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Ir al inicio"
+          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flex: 'none' }}
+        >
           <img src="/assets/logo-color.png" alt="ConstruAuto de México" style={{ height: 28, display: 'block' }} />
         </Link>
 
