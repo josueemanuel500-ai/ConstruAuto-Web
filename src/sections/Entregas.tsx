@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import UpcomingDeliveriesGrid from '../components/UpcomingDeliveriesGrid';
 import { useUpcomingDeliveries } from '../lib/useUpcomingDeliveries';
 import { useYoutubePlaylist } from '../lib/useYoutubePlaylist';
 import { waLink } from '../lib/whatsapp';
@@ -101,134 +102,14 @@ export default function Entregas() {
       {upShow && (
         <section style={{ background: '#fff', borderBottom: '1px solid #F3F4F6' }}>
           <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 24px' }}>
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'flex-end',
-                justifyContent: 'space-between',
-                gap: 16,
-                marginBottom: 36,
-              }}
-            >
-              <div>
-                <div
-                  style={{
-                    color: '#FF690F',
-                    fontWeight: 800,
-                    fontSize: 14,
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase',
-                    marginBottom: 12,
-                  }}
-                >
-                  Próximas entregas
-                </div>
-                <h2 style={{ margin: 0, fontSize: 'clamp(26px,3.4vw,38px)', fontWeight: 800, fontStyle: 'italic' }}>
-                  Autos programados para entrega
-                </h2>
-              </div>
-              <a href={waHref} target="_blank" rel="noreferrer" className="ca-link-orange" style={{ fontWeight: 800, fontSize: 16 }}>
-                Quiero el mío →
-              </a>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 24 }}>
-              {upcoming.map((u) => {
-                const hovered = hoverKey === 'up-' + u.id;
-                return (
-                  <div
-                    key={u.id}
-                    onMouseEnter={() => setHoverKey('up-' + u.id)}
-                    onMouseLeave={() => setHoverKey(null)}
-                    style={{
-                      background: '#fff',
-                      border: '1px solid #E5E7EB',
-                      borderRadius: 20,
-                      overflow: 'hidden',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      boxShadow: hovered ? '0 16px 40px rgba(31,41,51,0.12)' : '0 1px 3px rgba(31,41,51,0.06)',
-                      transform: hovered ? 'translateY(-4px)' : 'none',
-                      transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-                    }}
-                  >
-                    <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3', background: '#1F2933', overflow: 'hidden' }}>
-                      <img
-                        src={u.img}
-                        alt={u.name}
-                        loading="lazy"
-                        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                      />
-                      <div
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          background: 'linear-gradient(180deg,rgba(31,41,51,0) 55%,rgba(31,41,51,0.55) 100%)',
-                        }}
-                      />
-                      <span
-                        style={{
-                          position: 'absolute',
-                          top: 14,
-                          left: 14,
-                          background: 'var(--ca-orange-gradient)',
-                          color: '#fff',
-                          fontWeight: 800,
-                          fontSize: 12.5,
-                          letterSpacing: '0.06em',
-                          textTransform: 'uppercase',
-                          padding: '7px 14px',
-                          borderRadius: 999,
-                          boxShadow: '0 6px 18px rgba(255,105,15,0.4)',
-                        }}
-                      >
-                        {u.countdown}
-                      </span>
-                    </div>
-                    <div style={{ padding: '22px 24px 24px', display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
-                      <div style={{ fontSize: 21, fontWeight: 800, lineHeight: 1.2 }}>{u.name}</div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 15, fontWeight: 700, color: '#3E4C59' }}>
-                          <svg
-                            width="18"
-                            height="18"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#FF690F"
-                            strokeWidth="2.2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            style={{ flex: 'none' }}
-                          >
-                            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
-                            <path d="M16 2v4M8 2v4M3 10h18"></path>
-                          </svg>
-                          <span style={{ textTransform: 'capitalize' }}>{u.dateLabel}</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 15, fontWeight: 700, color: '#3E4C59' }}>
-                          <svg
-                            width="18"
-                            height="18"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#FF690F"
-                            strokeWidth="2.2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            style={{ flex: 'none' }}
-                          >
-                            <circle cx="12" cy="12" r="9"></circle>
-                            <path d="M12 7v5l3 2"></path>
-                          </svg>
-                          <span>{u.timeLabel}</span>
-                        </div>
-                      </div>
-                      {u.hasNote && <p style={{ margin: '2px 0 0', fontSize: 14.5, lineHeight: 1.6, color: '#52606D' }}>{u.note}</p>}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <UpcomingDeliveriesGrid
+              upcoming={upcoming}
+              headerAction={
+                <a href={waHref} target="_blank" rel="noreferrer" className="ca-link-orange" style={{ fontWeight: 800, fontSize: 16 }}>
+                  Quiero el mío →
+                </a>
+              }
+            />
           </div>
         </section>
       )}

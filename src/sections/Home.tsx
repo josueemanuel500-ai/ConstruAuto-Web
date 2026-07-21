@@ -6,6 +6,7 @@ import { useCatalog } from '../lib/useCatalog';
 import { useUpcomingDeliveries } from '../lib/useUpcomingDeliveries';
 import Reveal from '../components/Reveal';
 import CarIcon from '../components/icons/CarIcon';
+import UpcomingDeliveriesGrid from '../components/UpcomingDeliveriesGrid';
 
 const WA_HREF = waLink('Hola, quiero información sobre un autofinanciamiento para un vehículo.');
 
@@ -180,8 +181,7 @@ export default function Home() {
   const { ref: statsRef, vals: stats } = useAnimatedStats();
   const { cars } = useCatalog();
   const homeCars = cars.slice(0, 3);
-  const { upcoming, configured } = useUpcomingDeliveries();
-  const previewDeliveries = upcoming.slice(0, 3);
+  const { upcoming } = useUpcomingDeliveries();
   const verTodasCta = useHover();
 
   const heroCta = useHover();
@@ -397,6 +397,52 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PROXIMAS ENTREGAS */}
+      <section style={{ background: '#F5F6F8', borderBottom: '1px solid #E5E7EB' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px' }}>
+          <UpcomingDeliveriesGrid
+            upcoming={upcoming}
+            limit={3}
+            headerAction={
+              <Link to="/entregas" style={{ color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
+                Ver todas las entregas →
+              </Link>
+            }
+            fallback={
+              <p style={{ margin: 0, fontSize: 17, lineHeight: 1.6, color: '#52606D', maxWidth: 680 }}>
+                Cada entrega es una historia. Mira en video cómo nuestros clientes reciben las llaves de su auto.
+              </p>
+            }
+            bottomAction={
+              <div style={{ textAlign: 'center', marginTop: 40 }}>
+                <Link
+                  to="/entregas"
+                  onMouseEnter={verTodasCta.onMouseEnter}
+                  onMouseLeave={verTodasCta.onMouseLeave}
+                  style={{
+                    display: 'inline-block',
+                    cursor: 'pointer',
+                    background: verTodasCta.hover ? '#E55A05' : 'var(--ca-orange-gradient)',
+                    color: '#fff',
+                    fontWeight: 800,
+                    fontSize: 16,
+                    padding: '16px 34px',
+                    borderRadius: 12,
+                    textDecoration: 'none',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.02em',
+                    boxShadow: '0 10px 28px rgba(255,105,15,0.35)',
+                    transform: verTodasCta.hover ? 'translateY(-2px)' : 'none',
+                  }}
+                >
+                  Ver todas las entregas
+                </Link>
+              </div>
+            }
+          />
+        </div>
+      </section>
+
       {/* COMO FUNCIONA */}
       <section style={{ background: '#F5F6F8' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px' }}>
@@ -532,94 +578,6 @@ export default function Home() {
                 </div>
               </Reveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* VISTA PREVIA ENTREGAS */}
-      <section style={{ background: '#F5F6F8', borderTop: '1px solid #E5E7EB' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'end', justifyContent: 'space-between', gap: 16, marginBottom: 40 }}>
-            <div>
-              <div style={{ color: '#FF690F', fontWeight: 800, fontSize: 14, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 12 }}>
-                Entregas
-              </div>
-              <h2 style={{ margin: 0, fontSize: 'clamp(28px,3.6vw,40px)', fontWeight: 800, fontStyle: 'italic' }}>Clientes reales, autos entregados</h2>
-            </div>
-            <Link to="/entregas" style={{ color: '#FF690F', fontWeight: 800, fontSize: 16, textDecoration: 'none' }}>
-              Ver todas las entregas →
-            </Link>
-          </div>
-
-          {configured && previewDeliveries.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24, marginBottom: 40 }}>
-              {previewDeliveries.map((u) => (
-                <div
-                  key={u.id}
-                  style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: 18, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-                >
-                  <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3', background: '#1F2933', overflow: 'hidden' }}>
-                    <img
-                      src={u.img}
-                      alt={u.name}
-                      loading="lazy"
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                    />
-                    <span
-                      style={{
-                        position: 'absolute',
-                        top: 14,
-                        left: 14,
-                        background: 'var(--ca-orange-gradient)',
-                        color: '#fff',
-                        fontWeight: 800,
-                        fontSize: 12.5,
-                        letterSpacing: '0.06em',
-                        textTransform: 'uppercase',
-                        padding: '7px 14px',
-                        borderRadius: 999,
-                        boxShadow: '0 6px 18px rgba(255,105,15,0.4)',
-                      }}
-                    >
-                      {u.countdown}
-                    </span>
-                  </div>
-                  <div style={{ padding: '18px 20px 20px' }}>
-                    <div style={{ fontSize: 19, fontWeight: 800, lineHeight: 1.2 }}>{u.name}</div>
-                    <div style={{ marginTop: 6, fontSize: 14, fontWeight: 600, color: '#52606D', textTransform: 'capitalize' }}>{u.dateLabel}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p style={{ margin: '0 0 40px', fontSize: 17, lineHeight: 1.6, color: '#52606D', maxWidth: 680 }}>
-              Cada entrega es una historia. Mira en video cómo nuestros clientes reciben las llaves de su auto.
-            </p>
-          )}
-
-          <div style={{ textAlign: 'center' }}>
-            <Link
-              to="/entregas"
-              onMouseEnter={verTodasCta.onMouseEnter}
-              onMouseLeave={verTodasCta.onMouseLeave}
-              style={{
-                display: 'inline-block',
-                cursor: 'pointer',
-                background: verTodasCta.hover ? '#E55A05' : 'var(--ca-orange-gradient)',
-                color: '#fff',
-                fontWeight: 800,
-                fontSize: 16,
-                padding: '16px 34px',
-                borderRadius: 12,
-                textDecoration: 'none',
-                textTransform: 'uppercase',
-                letterSpacing: '0.02em',
-                boxShadow: '0 10px 28px rgba(255,105,15,0.35)',
-                transform: verTodasCta.hover ? 'translateY(-2px)' : 'none',
-              }}
-            >
-              Ver todas las entregas
-            </Link>
           </div>
         </div>
       </section>
