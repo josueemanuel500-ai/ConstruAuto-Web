@@ -128,15 +128,24 @@ export default function Servicios() {
               <p style={{ margin: '0 0 24px', color: '#CBD2D9', fontSize: 16, lineHeight: 1.6 }}>
                 Sin historiales complicados ni trámites eternos. Reúne estos documentos y estás del otro lado.
               </p>
-              <a
-                href={WA_REQUISITOS_HREF}
-                target="_blank"
-                rel="noreferrer"
-                className="ca-btn-primary"
-                style={{ display: 'inline-block', fontWeight: 800, fontSize: 16, padding: '14px 26px', borderRadius: 12, textDecoration: 'none' }}
-              >
-                Enviar mis requisitos por WhatsApp
-              </a>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+                <a
+                  href="/solicitud"
+                  className="ca-btn-primary"
+                  style={{ display: 'inline-block', fontWeight: 800, fontSize: 16, padding: '14px 26px', borderRadius: 12, textDecoration: 'none' }}
+                >
+                  Iniciar presolicitud
+                </a>
+                <a
+                  href={WA_REQUISITOS_HREF}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="ca-btn-ghost-dark"
+                  style={{ display: 'inline-block', fontWeight: 800, fontSize: 16, padding: '14px 26px', borderRadius: 12, textDecoration: 'none' }}
+                >
+                  Enviar mis requisitos por WhatsApp
+                </a>
+              </div>
             </div>
             <ul style={{ flex: '1 1 340px', minWidth: 280, listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
               {REQUISITOS.map((r) => (
